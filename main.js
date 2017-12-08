@@ -9,7 +9,7 @@ require('./lib/json-utils.js');
 
 var _input_files = get_input_files();
 var _output_dir = './output/' + get_date_time();
-mkdir(_output_dir);
+//mkdir(_output_dir);
 
 //console.log(_input_files);
 //console.log(cfg);
