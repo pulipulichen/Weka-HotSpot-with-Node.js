@@ -1,9 +1,5 @@
-fs = require('fs');
-path = require('path');
-const ini = require('node-ini');
+require('./require-packages.js');
 cfg = ini.parseSync('./config.ini');
-shell = require('shelljs');
-sleep = require('sleep');
 
 require('./lib/time-utils.js');
 require('./lib/file-utils.js');
