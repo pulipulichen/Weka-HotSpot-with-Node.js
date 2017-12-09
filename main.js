@@ -70,7 +70,5 @@ var _data = {
         "item4": 1
     }
 };
-//console.log(ChiSquareUtils.analyze(_data));
-console.log(Tau.y2x(_data));
-
-//console.log(jStat.ztest(1.96));
+console.log(ChiSquareUtils.analyze(_data));
+//console.log(Tau.y2x(_data));
