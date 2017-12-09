@@ -53,7 +53,7 @@ var _p_value = jStat.ftest(_f_score, _df1, _df2);
 //console.log(jstat_obj.anovafscore());
 console.log(jStat.tukeyhsd(_data));
 */
-
+/*
 var _data = {
     "male": {
         "item1": 6,
@@ -69,3 +69,5 @@ var _data = {
     }
 };
 console.log(ChiSquareUtils.analyze(_data));
+*/
+console.log(jStat.ztest(1.96));

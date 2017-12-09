@@ -2,7 +2,17 @@ ChiSquareUtils = {
     analyze: function (_contingency_table) {
         var _cell_json = this.cell_analyze(_contingency_table);
         
-        return this.chisquared(_cell_json);
+        var _mode = "chi-sqr";
+        
+        var _chi_sqr;
+        if (_mode === "chi-sqr") {
+            _chi_sqr = this.chisquared(_cell_json);
+        }
+        else if (_mode === "yates") {
+            _chi_sqr = this.yates_chisquared(_cell_json);
+        }
+        
+        return _chi_sqr;
     },
     x_len: function (_contingency_table) {
         var _x_len = 0;
@@ -90,10 +100,9 @@ ChiSquareUtils = {
             for (var _y_var_name in _ct_json[_x_var_name]) {
                 var _num = _ct_json[_x_var_name][_y_var_name];
 
-                var _total_per = _num / _total_sum;
-                var _y_per = _num / _y_sum_list[_y_var_name];
-
-                var _x_per = _num / _x_sum_list[_x_var_name];
+                //var _total_per = _num / _total_sum;
+                //var _y_per = _num / _y_sum_list[_y_var_name];
+                //var _x_per = _num / _x_sum_list[_x_var_name];
                 
                 var _exp = (_x_sum_list[_x_var_name] * _y_sum_list[_y_var_name]) / _total_sum;
 
@@ -104,12 +113,8 @@ ChiSquareUtils = {
                 var _adj_residual = _residual / Math.sqrt( _exp * (1 - _x_per_list[_x_var_name]) * (1 - _y_per_list[_y_var_name]) );
                 // 我要這格
 
-
-                if (Math.abs(_adj_residual) > 1.96) {
-                    if (_adj_residual < -1.96) {
-                        //_tbody.find('tr[y_var="' + _y_var_name + '"] td[x_var="' + _x_var_name + '"]').addClass("neg");
-                    }
-                }
+                var _sig_level = this.zscore_sig_level(_adj_residual);
+                
                 //var _y = ( Math.pow((Math.abs(_residual) - 0.5), 2) / _exp );
                 //_yates_chi_squared += _y;
                 //console.log([_yates_chi_squared, _y]);
@@ -120,15 +125,13 @@ ChiSquareUtils = {
                 _cell_json[_x_var_name][_y_var_name] = {
                     "exp": _exp,
                     "std-residual": _std_residual,
+                    "yates-residual": ( Math.pow((Math.abs(_residual) - 0.5), 2) / _exp ),
                     "adj-residual": _adj_residual,
-                    "yates-residual": ( Math.pow((Math.abs(_residual) - 0.5), 2) / _exp )
+                    "sig-level": _sig_level
                 };
             }
         }
         return _cell_json;
-    },
-    alpha: function () {
-        return parseNumber(cfg.weka.stat_alpha);
     },
     chisquared: function (_cell_json) {
         var _df = this.df(_cell_json);
@@ -140,11 +143,11 @@ ChiSquareUtils = {
             }
         }
         var _p_value = chisqrprob(_df, _chi_squared);
-        var _is_sig = (_p_value < this.alpha());
+        var _sig_level = this.sig_level(_p_value);
         return {
             "chisquare": _chi_squared,
             "p-value": _p_value,
-            "is-sig": _is_sig
+            "sig-level": _sig_level
         };
     },
     yates_chisquared: function (_cell_json) {
@@ -157,11 +160,11 @@ ChiSquareUtils = {
             }
         }
         var _p_value = chisqrprob(_df, _chi_squared);
-        var _is_sig = (_p_value < this.alpha());
+        var _sig_level = this.sig_level(_p_value);
         return {
             "chisquare": _chi_squared,
             "p-value": _p_value,
-            "is-sig": _is_sig
+            "sig-level": _sig_level
         };
     },
     sig_level: function (_p_value) {
@@ -175,5 +178,39 @@ ChiSquareUtils = {
             }
         }
         return _level;
+    },
+    zscore_sig_level: function (_z_score) {
+        _z_score = Math.abs(_z_score);
+        var _alpha_levels = cfg.weka.stat_alpha.split(",");
+        var _level = -1;
+        for (var _i = _alpha_levels.length - 1; _i >= 0; _i--) {
+            var _alpha = parseNumber(_alpha_levels[_i]);
+            var _alpha_zscore = this.percentile_z(_alpha);
+            if (_z_score > _alpha_zscore) {
+                _level = _i;
+                break;
+            }
+        }
+        return _level;
+    },
+    /**
+     * @author https://stackoverflow.com/a/36577594/6645399
+     * @param {type} p
+     * @returns {Number}
+     */
+    percentile_z: function (p) {
+        var a0= 2.5066282,  a1=-18.6150006,  a2= 41.3911977,   a3=-25.4410605,
+            b1=-8.4735109,  b2= 23.0833674,  b3=-21.0622410,   b4=  3.1308291,
+            c0=-2.7871893,  c1= -2.2979648,  c2=  4.8501413,   c3=  2.3212128,
+            d1= 3.5438892,  d2=  1.6370678, r, z;
+
+        if (p>0.42) {
+            r=Math.sqrt(-Math.log(0.5-p));
+            z=(((c3*r+c2)*r+c1)*r+c0)/((d2*r+d1)*r+1);
+        } else {
+            r=p*p;
+            z=p*(((a3*r+a2)*r+a1)*r+a0)/((((b4*r+b3)*r+b2)*r+b1)*r+1);
+        }
+        return z;
     }
 };
