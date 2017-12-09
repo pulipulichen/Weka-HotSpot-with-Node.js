@@ -7,7 +7,8 @@ require('./utils/weka-hotspot-utils.js');
 require('./utils/string-utils.js');
 require('./utils/json-utils.js');
 require('./utils/csv-utils.js');
-require('./utils/chisquare-utils.js');
+require('./utils/stat/chisquare-utils.js');
+require('./utils/stat/anova-utils.js');
 require('./lib/statistics-distributions.js');
 
 var _input_files = get_input_files();
@@ -53,8 +54,18 @@ var _p_value = jStat.ftest(_f_score, _df1, _df2);
 console.log(jStat.tukeyhsd(_data));
 */
 
-var _data = [
-    [6,5,9,4],
-    [16,5,4,1]
-];
+var _data = {
+    "male": {
+        "item1": 6,
+        "item2": 5,
+        "item3": 9,
+        "item4": 4
+    },
+    "female": {
+        "item1": 16,
+        "item2": 5,
+        "item3": 4,
+        "item4": 1
+    }
+};
 console.log(ChiSquareUtils.analyze(_data));
