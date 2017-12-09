@@ -125,8 +125,10 @@ WekaHotSpotUtils = {
                             _result_tree.lhs[_i][_indication] = _result_rule[_i][_indication];
                         }
                     }
+                    _result[_file_name]["rhs"] = _raw_result_tree["rhs"];
+                    _result[_file_name]["lhs"] = _raw_result_tree["lhs"];
                     
-                    console.log(_result_tree);
+                    //console.log(_result_tree);
                 }
             }
         }
@@ -276,4 +278,4 @@ WekaHotSpotUtils = {
     parsing_raw_result_right: function (_raw_result_right) {
         return _raw_result_right;
     }
-}
+};
