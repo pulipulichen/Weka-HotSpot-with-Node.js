@@ -96,6 +96,6 @@ AnovaUtils = {
                 break;
             }
         }
-        return _level;
+        return _level+1;
     }
 };

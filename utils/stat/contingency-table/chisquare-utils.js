@@ -1,14 +1,47 @@
 ChiSquareUtils = {
+    example_data: {
+        "male": {
+            "item1": 6,
+            "item2": 5,
+            "item3": 9,
+            "item4": 4
+        },
+        "female": {
+            "item1": 16,
+            "item2": 5,
+            "item3": 4,
+            "item4": 1
+        }
+    },
     analyze: function (_contingency_table) {
+        
         var _cell_json = this.cell_analyze(_contingency_table);
         
         var _mode = "chi-sqr";
+        
+        var _x_vars_count = this.x_len(_contingency_table);
+        var _y_vars_count = this.y_len(_contingency_table);
+        if (_x_vars_count === 2 && _y_vars_count === 2) {
+            var _min_exp = this.get_min_exp(_cell_json);
+            if (_min_exp < 5) {
+                var _total_sum = this.sum(_contingency_table);
+                if (_total_sum < 20) {
+                    _mode = "fisher-exact";
+                }
+                else {
+                    _mode = "yates-corr";
+                }
+            }
+        }
         
         var _chi_sqr;
         if (_mode === "chi-sqr") {
             _chi_sqr = this.chisquared(_cell_json);
         }
-        else if (_mode === "yates") {
+        else if (_mode === "yates-corr") {
+            _chi_sqr = this.yates_chisquared(_cell_json);
+        }
+        else {
             _chi_sqr = this.yates_chisquared(_cell_json);
         }
         
@@ -167,6 +200,9 @@ ChiSquareUtils = {
             "sig-level": _sig_level
         };
     },
+    fisher_exact: function (_cell_json) {
+        
+    },
     sig_level: function (_p_value) {
         var _alpha_levels = cfg.weka.stat_alpha.split(",");
         var _level = -1;
@@ -177,7 +213,7 @@ ChiSquareUtils = {
                 break;
             }
         }
-        return _level;
+        return _level+1;
     },
     zscore_sig_level: function (_z_score) {
         _z_score = Math.abs(_z_score);
@@ -191,7 +227,7 @@ ChiSquareUtils = {
                 break;
             }
         }
-        return _level;
+        return _level+1;
     },
     /**
      * @author https://stackoverflow.com/a/36577594/6645399
@@ -212,5 +248,20 @@ ChiSquareUtils = {
             z=p*(((a3*r+a2)*r+a1)*r+a0)/((((b4*r+b3)*r+b2)*r+b1)*r+1);
         }
         return z;
+    },
+    get_min_exp: function (_cell_json) {
+        var _min_exp;
+        for (var _x in _cell_json) {
+            for (var _y in _cell_json[_x]) {
+               var _exp = _cell_json[_x][_y]["exp"];
+               if (_min_exp === undefined || _exp < _min_exp) {
+                   _min_exp = _exp;
+                   if (_min_exp === 0) {
+                       return 0;
+                   }
+               }
+            }
+        }
+        return _min_exp;
     }
 };

@@ -7,8 +7,10 @@ require('./utils/weka-hotspot-utils.js');
 require('./utils/string-utils.js');
 require('./utils/json-utils.js');
 require('./utils/csv-utils.js');
-require('./utils/stat/chisquare-utils.js');
 require('./utils/stat/anova-utils.js');
+require('./utils/stat/contingency-table/chisquare-utils.js');
+require('./utils/stat/contingency-table/fisher-exact-test.js');
+require('./utils/stat/contingency-table/tau.js');
 require('./lib/statistics-distributions.js');
 
 var _input_files = get_input_files();
@@ -53,7 +55,7 @@ var _p_value = jStat.ftest(_f_score, _df1, _df2);
 //console.log(jstat_obj.anovafscore());
 console.log(jStat.tukeyhsd(_data));
 */
-/*
+
 var _data = {
     "male": {
         "item1": 6,
@@ -69,5 +71,5 @@ var _data = {
     }
 };
 console.log(ChiSquareUtils.analyze(_data));
-*/
-console.log(jStat.ztest(1.96));
+
+//console.log(jStat.ztest(1.96));
