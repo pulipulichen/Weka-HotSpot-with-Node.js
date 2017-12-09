@@ -18,7 +18,7 @@ var Main = {
     exec: function () {
         TmpUtils.remove();
         this.setup_data();
-        //this.stat();
+        this.stat();
         this.hotspot();
         this.add_stat_to_hotspot();
     },
@@ -49,7 +49,42 @@ var Main = {
         this.data.hotspot = _hotspot_result;
     },
     add_stat_to_hotspot: function () {
-        console.log(this.data.hotspot)
+        //console.log(this.data.hotspot)
+        TmpUtils.append(this.data.stat);
+        
+        var _stat = this.data.stat;
+        var _hotspot = this.data.hotspot;
+        var _types = this.data.attributes_type;
+        for (var _file_name in _hotspot) {
+            for (var _direction in _hotspot[_file_name]) {
+                for (var _r = 0; _r < _hotspot[_file_name][_direction].length; _r++) {
+                    var _rules = _hotspot[_file_name][_direction][_r];
+                    var _group = _rules.rhs.value;
+
+                    for (var _l = 0; _l < _rules.lhs.length; _l++) {
+                        var _attr = _rules.lhs[_l].attribute;
+                        var _value = _rules.lhs[_l].value;
+                        var _type = _types[_attr];
+                        var _attr_stat = _stat[_attr];
+
+                        var _test, _comparison;
+
+                        if (_type === "numeric") {
+                            _test = _attr_stat["anova"];
+                            _comparison = _attr_stat["tukeyhsd"][_group];
+                        }
+                        else if (_type === "nominal") {
+                            _test = _attr_stat["chi-square"];
+                            _comparison = _attr_stat["cell"][_group][_value];
+                        }
+                        
+                        _rules.lhs[_l]["test"] = _test;
+                        _rules.lhs[_l]["comparison"] = _comparison;
+                    }   // for (var _l = 0; _l < _rules.lhs.length; _l++) {
+                }   // for (var _r = 0; _r < this.data.hotspot[_file_name][_direction].length; _r++) {
+            }   // for (var _direction in this.data.hotspot[_file_name]) {
+        }   // for (var _file_name in this.data.hotspot) {
+        
         TmpUtils.append(this.data.hotspot);
     }
 };
