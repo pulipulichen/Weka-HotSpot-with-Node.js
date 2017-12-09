@@ -263,5 +263,14 @@ ChiSquareUtils = {
             }
         }
         return _min_exp;
+    },
+    cramer_v: function (_chi_squared, _x_vars_count, _y_vars_count, _total_sum) {        
+        
+        var _cramer_v_k = _x_vars_count;
+        if (_y_vars_count < _x_vars_count) {
+            _cramer_v_k = _y_vars_count;
+        }
+        var _cramer_v = Math.sqrt(_chi_squared / (_total_sum * (_cramer_v_k - 1)) );
+        return _cramer_v;
     }
 };

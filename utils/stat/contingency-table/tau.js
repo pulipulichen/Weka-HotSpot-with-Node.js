@@ -66,6 +66,8 @@ Tau = {
         var _tau = 1 - (_e2 / _e1);
         return _tau;
     },
+    
+    //-------------------------------------
     sum: function (_contingency_table) {
         var _sum = 0;
         for (var _i in _contingency_table) {
