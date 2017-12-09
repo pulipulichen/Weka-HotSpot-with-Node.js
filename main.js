@@ -1,12 +1,14 @@
 require('./require-packages.js');
 cfg = ini.parseSync('./config.ini');
 
-require('./lib/time-utils.js');
-require('./lib/file-utils.js');
-require('./lib/weka-hotspot-utils.js');
-require('./lib/string-utils.js');
-require('./lib/json-utils.js');
-require('./lib/csv-utils.js');
+require('./utils/time-utils.js');
+require('./utils/file-utils.js');
+require('./utils/weka-hotspot-utils.js');
+require('./utils/string-utils.js');
+require('./utils/json-utils.js');
+require('./utils/csv-utils.js');
+require('./utils/chisquare-utils.js');
+require('./lib/statistics-distributions.js');
 
 var _input_files = get_input_files();
 var _output_dir = './output/' + get_date_time();
@@ -25,7 +27,7 @@ var _hotspot_result = WekaHotSpotUtils.parsing_raw_result(_hotspot_result_raw);
 //console.log(_weka_result_raw);
 */
 
-
+/*
 var _csv1 = CSVUtils.read(_input_files[0]);
 var _group_json = CSVUtils.group_by_target_attribute(_csv1);
 var _flat_json = CSVUtils.flat_attribute_data(_group_json);
@@ -34,7 +36,7 @@ var _types_json = CSVUtils.detect_attribute_type(_flat_json);
 var _group_json = CSVUtils.count_nominal_attribute_data(_group_json, _types_json);
 var _group_json = CSVUtils.stat.analyse(_group_json, _types_json);
 console.log(_group_json);
-
+*/
 
 /*
 var _data = [
@@ -50,3 +52,9 @@ var _p_value = jStat.ftest(_f_score, _df1, _df2);
 //console.log(jstat_obj.anovafscore());
 console.log(jStat.tukeyhsd(_data));
 */
+
+var _data = [
+    [6,5,9,4],
+    [16,5,4,1]
+];
+console.log(ChiSquareUtils.analyze(_data));
