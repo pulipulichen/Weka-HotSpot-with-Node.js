@@ -13,6 +13,7 @@ require('./utils/stat/contingency-table/chisquare-utils.js');
 require('./utils/stat/contingency-table/fisher-exact-test.js');
 require('./utils/stat/contingency-table/tau.js');
 require('./lib/statistics-distributions.js');
+require('./utils/template-utils.js');
 
 var Main = {
     exec: function () {
@@ -89,58 +90,14 @@ var Main = {
     }
 };
 
-Main.exec();
+//Main.exec();
 
-
-//mkdir(_output_dir);
-
-//console.log(_input_files);
-//console.log(cfg);
-//console.log(_exclude_files);
-//console.log(_input_files);
-/*
-//var _weka_cmds = build_weka_hotspot_commands(_input_files, _output_dir);
-//console.log(_weka_cmds);
-//console.log(build_weka_hotspot_command(_input_files[0]));
-var _hotspot_result_raw = WekaHotSpotUtils.run_commands(_input_files);
-var _hotspot_result = WekaHotSpotUtils.parsing_raw_result(_hotspot_result_raw);
-//console.log(_weka_result_raw);
-*/
-
-
-
-
-
-/*
-var _data = [
-    [2,1,1,2,3,1,1,2,2,1],
-    [2,2,3,2,2,2,3],
-    [2,3,3,2,3,2,3,3,3]];
-
-var _df1 = 2;
-var _df2 = 23;
-var _f_score = anova.test(_data);
-var _p_value = jStat.ftest(_f_score, _df1, _df2);
-//jstat_obj = jStat(_data);
-//console.log(jstat_obj.anovafscore());
-console.log(jStat.tukeyhsd(_data));
-*/
-/*
-var _data = {
-    "male": {
-        "item1": 6,
-        "item2": 5,
-        "item3": 9,
-        "item4": 4
-    },
-    "female": {
-        "item1": 16,
-        "item2": 5,
-        "item3": 4,
-        "item4": 1
-    }
+var view = {
+  title: "Joe",
+  calc: function () {
+    return 2 + 4;
+  }
 };
-console.log(ChiSquareUtils.analyze(_data));
-*/
-//console.log(Tau.y2x(_data));
 
+var output = Mustache.render("{{ title }} spends {{ calc }}", view);
+console.log(output);

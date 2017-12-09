@@ -13,3 +13,6 @@ jStat = require('jStat').jStat;
 
 // npm install anova
 anova = require('anova');
+
+// npm install mustache --save
+Mustache = require('mustache');
