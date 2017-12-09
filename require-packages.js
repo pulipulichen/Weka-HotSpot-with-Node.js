@@ -19,5 +19,6 @@ Mustache = require('mustache');
 
 // npm install node-file-cache --save
 cache = require('node-file-cache').create({
-    file: "node-file-cache.json"
+    file: "node-file-cache.json",
+    life: 3600 * 24
 });

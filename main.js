@@ -17,7 +17,6 @@ require('./utils/template-utils.js');
 
 var Main = {
     exec: function () {
-        TmpUtils.remove();
         
         this.setup_data();
         this.setup_cache();
@@ -120,7 +119,8 @@ var Main = {
     }
 };
 
-Main.exec();
+TmpUtils.remove();
+//Main.exec();
 
 //cache.init({'ttl':10000});
 /*
@@ -142,3 +142,9 @@ var view = {
 var output = Mustache.render("{{ title }} spends {{ calc }}", view);
 console.log(output);
 */
+
+var _data = ChiSquareUtils.example_data;
+var _result = TemplateUtils.render("test", {ct: _data});
+//TmpUtils.append(TemplateUtils.convert_to_template_json(_data));
+console.log(_result);
+TmpUtils.append(_result);

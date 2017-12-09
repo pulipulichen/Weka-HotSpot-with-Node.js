@@ -1,0 +1,23 @@
+<table class="stat-table">
+    <caption>
+        {{ file_name }}
+    </caption>
+    <thead>
+        <tr>
+            <th> Attr. </th>
+            {{ #target_attribute_options }}
+                <th>{{ element }}</th>
+            {{ /target_attribute_options }}
+        </tr>
+    </thead>
+    <tbody>
+        {{ #attribute_list }}
+            <tr>
+                <th>{{ key }}</th>
+                {{ #target_attribute_options }}
+                    <th>{{ element }}</th>
+                {{ /target_attribute_options }}
+            </tr>
+        {{ /attribute_list }}
+    </tbody>
+</table>
