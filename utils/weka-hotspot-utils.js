@@ -25,9 +25,12 @@ WekaHotSpotUtils = {
     },
 
     run_commands: function (_input_files, _output_dir) {
+        var _debug = true;
+        
         var _output_result = {};    
         for (var _i = 0; _i < _input_files.length; _i++) {
-            var _file_name = _input_files[_i];
+            var _path_name = _input_files[_i];
+            var _file_name = path.basename(_path_name, '.csv');
             _output_result[_file_name] = [];
             var _option_index = 1;
             var _index_too_large = false;
@@ -43,7 +46,7 @@ WekaHotSpotUtils = {
                         if (_d === 1) {
                             _direction = "-R";
                         }
-                        var _cmd = this.build_command(_file_name, _option_index, _minimize_target, _direction);
+                        var _cmd = this.build_command(_path_name, _option_index, _minimize_target, _direction);
 
                         console.log(_cmd);
                         var _shell_result = shell.exec(_cmd);
@@ -68,13 +71,15 @@ WekaHotSpotUtils = {
                         
                     }
                     
-                    break;  // 測試用，加快處理速度
+                    if (_debug === true) {
+                        break;  // 測試用，加快處理速度
+                    }
                 }
                 _option_index++;
                 
                 // 測試用，加快處理速度
-                if (_option_index > 1) {
-                    break;
+                if (_debug === true && _option_index > 1) {
+                    //break;
                 }
             }   
         }
@@ -131,13 +136,10 @@ WekaHotSpotUtils = {
                         _direction = "min";
                     }
                     if (typeof(_result[_file_name][_direction]) === "undefined") {
-                        _result[_file_name][_direction] = {};
+                        _result[_file_name][_direction] = [];
                     }
                     
-                    _result[_file_name][_direction]["rhs"] = _result_tree["rhs"];
-                    var _minimize_target = (_m === 1);
-                    _result[_file_name][_direction]["rhs"]["minimize-target"] = _minimize_target;
-                    _result[_file_name][_direction]["lhs"] = _result_tree["lhs"];
+                    _result[_file_name][_direction].push(_result_tree);
                     
                     //console.log(_result_tree);
                 }
