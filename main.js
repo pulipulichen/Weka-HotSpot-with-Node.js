@@ -50,7 +50,7 @@ var Main = {
     },
     add_stat_to_hotspot: function () {
         console.log(this.data.hotspot)
-        //TmpUtils.append(this.data.hotspot);
+        TmpUtils.append(this.data.hotspot);
     }
 };
 

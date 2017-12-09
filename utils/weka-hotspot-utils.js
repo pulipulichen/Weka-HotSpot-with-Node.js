@@ -94,10 +94,10 @@ WekaHotSpotUtils = {
                 // 先試著取出RHS吧，噢對了，我想要畫caption
                 for (var _option_index = 1; _option_index < _file_result.length; _option_index++) {
                     var _option_result_l = _file_result[_option_index][0];
-                    if (typeof(_result[_file_name]["__target_attribute"]) === "undefined") {
-                        var _target_attribute = substr_wrap(_option_result_l, "Target attribute: ", "\n");
-                        _result[_file_name]["__target_attribute"] = _target_attribute;
-                    }
+                    //if (typeof(_result[_file_name]["__target_attribute"]) === "undefined") {
+                    //    var _target_attribute = substr_wrap(_option_result_l, "Target attribute: ", "\n");
+                    //    _result[_file_name]["__target_attribute"] = _target_attribute;
+                    //}
                     var _target_value = substr_wrap(_option_result_l, "Target value: ", "[");
                     _option_value_mapping[_target_value] = _option_index;
                 }
@@ -125,8 +125,19 @@ WekaHotSpotUtils = {
                             _result_tree.lhs[_i][_indication] = _result_rule[_i][_indication];
                         }
                     }
-                    _result[_file_name]["rhs"] = _raw_result_tree["rhs"];
-                    _result[_file_name]["lhs"] = _raw_result_tree["lhs"];
+                    
+                    var _direction = "max";
+                    if (_m === 1) {
+                        _direction = "min";
+                    }
+                    if (typeof(_result[_file_name][_direction]) === "undefined") {
+                        _result[_file_name][_direction] = {};
+                    }
+                    
+                    _result[_file_name][_direction]["rhs"] = _result_tree["rhs"];
+                    var _minimize_target = (_m === 1);
+                    _result[_file_name][_direction]["rhs"]["minimize-target"] = _minimize_target;
+                    _result[_file_name][_direction]["lhs"] = _result_tree["lhs"];
                     
                     //console.log(_result_tree);
                 }
