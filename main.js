@@ -30,7 +30,7 @@ var _hotspot_result = WekaHotSpotUtils.parsing_raw_result(_hotspot_result_raw);
 //console.log(_weka_result_raw);
 */
 
-/*
+
 var _csv1 = CSVUtils.read(_input_files[0]);
 var _group_json = CSVUtils.group_by_target_attribute(_csv1);
 var _flat_json = CSVUtils.flat_attribute_data(_group_json);
@@ -39,7 +39,7 @@ var _types_json = CSVUtils.detect_attribute_type(_flat_json);
 var _group_json = CSVUtils.count_nominal_attribute_data(_group_json, _types_json);
 var _group_json = CSVUtils.stat.analyse(_group_json, _types_json);
 console.log(_group_json);
-*/
+
 
 /*
 var _data = [
@@ -55,7 +55,7 @@ var _p_value = jStat.ftest(_f_score, _df1, _df2);
 //console.log(jstat_obj.anovafscore());
 console.log(jStat.tukeyhsd(_data));
 */
-
+/*
 var _data = {
     "male": {
         "item1": 6,
@@ -71,4 +71,6 @@ var _data = {
     }
 };
 console.log(ChiSquareUtils.analyze(_data));
+*/
 //console.log(Tau.y2x(_data));
+

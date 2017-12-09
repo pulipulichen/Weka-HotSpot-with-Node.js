@@ -66,6 +66,7 @@ ChiSquareUtils = {
         else {
             _chi_sqr = this.fisher_exact_test(_contingency_table);
         }
+        _chi_sqr["mode"] = _mode;
         
         // ----------------
         
@@ -177,7 +178,7 @@ ChiSquareUtils = {
                 // 我要這格
 
                 var _sig_level = this.zscore_sig_level(_adj_residual);
-                console.log([_x_var_name, _y_var_name, _adj_residual, _sig_level]);
+                //console.log([_x_var_name, _y_var_name, _adj_residual, _sig_level]);
                 
                 //var _y = ( Math.pow((Math.abs(_residual) - 0.5), 2) / _exp );
                 //_yates_chi_squared += _y;

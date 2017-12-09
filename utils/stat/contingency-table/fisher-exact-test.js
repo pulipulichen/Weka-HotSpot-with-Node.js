@@ -78,23 +78,15 @@ FisherExactTest = {
         
         for (var _x in _x_sum_list) {
             var _sum = _x_sum_list[_x];
-            _p1 = _p1 * _calc_factorial(_sum);
+            _p1 = _p1 * this.calc_factorial(_sum);
         }
         for (var _y in _y_sum_list) {
             var _sum = _y_sum_list[_y];
-            _p1 = _p1 * _calc_factorial(_sum);
+            _p1 = _p1 * this.calc_factorial(_sum);
         }
 
         var _total_sum = this.sum(_ct_json);
-        var _p2 = _calc_factorial(_total_sum);
-
-        var _calc_p3 = function (_ary) {
-            var _p = 1;
-            for (var _i = 0; _i < _ary.length; _i++) {
-                _p = _p * _calc_factorial(_ary[_i]);
-            }
-            return _p;
-        };
+        var _p2 = this.calc_factorial(_total_sum);
 
         // --------------------------------
         var _p4;
@@ -135,7 +127,7 @@ FisherExactTest = {
                 }
             }
 
-            _p4 = (_p1 / (_p2 * _calc_p3(_ext_ary2)) );
+            _p4 = (_p1 / (_p2 * this.calc_p3(_ext_ary2)) );
             if (_over_original_flag === true) {
                 _original_p4 = _p4;
             }
@@ -173,6 +165,13 @@ FisherExactTest = {
 
         return _p;
     },
+    calc_p3: function (_ary) {
+        var _p = 1;
+        for (var _i = 0; _i < _ary.length; _i++) {
+            _p = _p * this.calc_factorial(_ary[_i]);
+        }
+        return _p;
+    },
     calc_factorial: function (num) {
         //num = Math.ceil(num);
         if (num < 0) {
@@ -183,7 +182,7 @@ FisherExactTest = {
             return 1; 
         }
         else { 
-            return num * _calc_factorial( num - 1 ); 
+            return num * this.calc_factorial( num - 1 ); 
         }
     },
     traverse_ct_json: function (_ct_json, _callback) {
