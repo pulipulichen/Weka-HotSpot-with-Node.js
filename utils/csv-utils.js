@@ -196,7 +196,7 @@ CSVUtils = {
             return AnovaUtils.analyze(_group_json);
         },
         compare_nominal_data: function (_group_json) {
-            return _group_json;
+            return ChiSquareUtils.analyze(_group_json);
         }
     }
 };

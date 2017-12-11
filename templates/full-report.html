@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Full report - {{ date }}</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        {{ #view }}
+            <!-- file name -->
+            
+            
+            <table class="stat">
+                <caption>{{ key }} (statistic)</caption>
+                <thead>
+                    <tr>
+                        <th>Attr.</th>
+                        {{}}
+                    </tr>
+                </thead>
+            </table>
+            
+            
+            <hr />
+            <!-- file name -->
+            <h1>{{ key }} (maximize target)</h1>
+            <hr />
+            <!-- file name -->
+            <h1>{{ key }} (minimize target)</h1>
+        {{ /view }}
+    </body>
+</html>

@@ -17,6 +17,28 @@ ChiSquareUtils = {
         
         var _cell_json = this.cell_analyze(_contingency_table);
         
+        // ----------------
+        
+        var _group_sig = {};
+        
+        for (var _x in _cell_json) {
+            for (var _y in _cell_json[_x]) {
+                var _sig_level = _cell_json[_x][_y]["sig-level"];
+                if (_sig_level > 0) {
+                    if (typeof(_group_sig[_x]) === "undefined") {
+                        _group_sig[_x] = [];
+                    }
+                    _group_sig[_x].push({
+                        "option": _y,
+                        "adj-residual": _cell_json[_x][_y]["adj-residual"],
+                        "sig-level": _sig_level
+                    });
+                }
+            }
+        }
+        
+        // ----------------
+        
         var _mode = "chi-sqr";
         
         var _x_vars_count = this.x_len(_contingency_table);
@@ -42,10 +64,19 @@ ChiSquareUtils = {
             _chi_sqr = this.yates_chisquared(_cell_json);
         }
         else {
-            _chi_sqr = this.yates_chisquared(_cell_json);
+            _chi_sqr = this.fisher_exact_test(_contingency_table);
         }
+        _chi_sqr["mode"] = _mode;
         
-        return _chi_sqr;
+        // ----------------
+        
+        return {
+            "chi-square": _chi_sqr,
+            //"group-sig": JSON.stringify(_group_sig),
+            "group-sig": _group_sig,
+            "cell": _cell_json,
+            "tau-y2x": Tau.y2x(_contingency_table)
+        };
     },
     x_len: function (_contingency_table) {
         var _x_len = 0;
@@ -147,6 +178,7 @@ ChiSquareUtils = {
                 // 我要這格
 
                 var _sig_level = this.zscore_sig_level(_adj_residual);
+                //console.log([_x_var_name, _y_var_name, _adj_residual, _sig_level]);
                 
                 //var _y = ( Math.pow((Math.abs(_residual) - 0.5), 2) / _exp );
                 //_yates_chi_squared += _y;
@@ -200,9 +232,6 @@ ChiSquareUtils = {
             "sig-level": _sig_level
         };
     },
-    fisher_exact: function (_cell_json) {
-        
-    },
     sig_level: function (_p_value) {
         var _alpha_levels = cfg.weka.stat_alpha.split(",");
         var _level = -1;
@@ -217,17 +246,8 @@ ChiSquareUtils = {
     },
     zscore_sig_level: function (_z_score) {
         _z_score = Math.abs(_z_score);
-        var _alpha_levels = cfg.weka.stat_alpha.split(",");
-        var _level = -1;
-        for (var _i = _alpha_levels.length - 1; _i >= 0; _i--) {
-            var _alpha = parseNumber(_alpha_levels[_i]);
-            var _alpha_zscore = this.percentile_z(_alpha);
-            if (_z_score > _alpha_zscore) {
-                _level = _i;
-                break;
-            }
-        }
-        return _level+1;
+        var _p_value = jStat.ztest(_z_score, 2);
+        return this.sig_level(_p_value);
     },
     /**
      * @author https://stackoverflow.com/a/36577594/6645399
@@ -263,5 +283,23 @@ ChiSquareUtils = {
             }
         }
         return _min_exp;
+    },
+    cramer_v: function (_chi_squared, _x_vars_count, _y_vars_count, _total_sum) {        
+        
+        var _cramer_v_k = _x_vars_count;
+        if (_y_vars_count < _x_vars_count) {
+            _cramer_v_k = _y_vars_count;
+        }
+        var _cramer_v = Math.sqrt(_chi_squared / (_total_sum * (_cramer_v_k - 1)) );
+        return _cramer_v;
+    },
+    fisher_exact_test: function (_contingency_table) {
+        var _p_value = FisherExactTest.analyze(_contingency_table);
+        var _sig_level = this.sig_level(_p_value);
+        return {
+            "chisquare": _p_value,
+            "p-value": _p_value,
+            "sig-level": _sig_level
+        };
     }
 };
