@@ -36,6 +36,8 @@ WekaHotSpotUtils = {
             var _index_too_large = false;
             while (_index_too_large === false) {
                 for (var _m = 0; _m < 2; _m++) {
+                    
+                    
                     var _minimize_target = "";
                     if (_m === 1) {
                         _minimize_target = "-L";
@@ -49,10 +51,12 @@ WekaHotSpotUtils = {
                         var _cmd = this.build_command(_path_name, _option_index, _minimize_target, _direction);
 
                         console.log(_cmd);
+                        
                         var _shell_result = shell.exec(_cmd);
                         //console.log(_shell_result);
-                        if (_shell_result.stderr !== "") {
+                        if (_shell_result.stderr !== "" && _shell_result.stderr.indexOf("large") > -1) {
                             _index_too_large = true;
+                            console.log("too large: " + _shell_result.stderr);
                             break;
                         }
                         var _result = _shell_result.stdout;
@@ -69,17 +73,21 @@ WekaHotSpotUtils = {
                         
                         //sleep.sleep(1); // sleep for ten seconds
                         
+                    }   //for (var _d = 0; _d < 2; _d++) {
+                    
+                    if (_index_too_large === true) {
+                        break;
                     }
                     
                     if (_debug === true) {
-                        break;  // 測試用，加快處理速度
+                        //break;  // 測試用，加快處理速度
                     }
-                }
+                }   // for (var _m = 0; _m < 2; _m++) {
                 _option_index++;
                 
                 // 測試用，加快處理速度
                 if (_debug === true && _option_index > 1) {
-                    break;
+                    //break;
                 }
             }   
         }

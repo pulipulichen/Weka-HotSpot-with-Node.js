@@ -1,5 +1,5 @@
 CacheUtils = {
-    enable: false,
+    enable: true,
     cache_files: {},
     set: function (_key, _value) {
         if (this.enable === false) {
