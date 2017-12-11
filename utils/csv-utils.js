@@ -7,7 +7,7 @@ CSVUtils = {
         // ------------------
         // _target_attribute
         
-        var _cfg_target_attribute = cfg.weka.hotspot_targetIndex;
+        var _cfg_target_attribute = cfg.hotspot.targetIndex;
         
         var _target_attribute;
         if (_cfg_target_attribute === "last") {
@@ -51,7 +51,7 @@ CSVUtils = {
         
         // _target_attribute
         
-        var _cfg_target_attribute = cfg.weka.hotspot_targetIndex;
+        var _cfg_target_attribute = cfg.hotspot.targetIndex;
         
         var _target_attribute;
         if (_cfg_target_attribute === "last") {

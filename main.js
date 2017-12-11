@@ -8,6 +8,7 @@ require('./utils/string-utils.js');
 require('./utils/json-utils.js');
 require('./utils/csv-utils.js');
 require('./utils/tmp-utils.js');
+require('./utils/cache-utils.js');
 require('./utils/stat/anova-utils.js');
 require('./utils/stat/contingency-table/chisquare-utils.js');
 require('./utils/stat/contingency-table/fisher-exact-test.js');
@@ -56,8 +57,7 @@ var Main = {
     stat: function () {
         var _cache_key = this.data.cache_key + "_stat";
         var _cache_key_t = this.data.cache_key + "_target";
-        this.data.stat = cache.get(_cache_key);
-        this.data.target_attribute_options = cache.get(_cache_key_t);
+        this.data.stat = CacheUtils.get(_cache_key);
         if (this.data.stat !== null) {
             return;
         }
@@ -95,13 +95,12 @@ var Main = {
         }
         this.data.stat = _stat_data;
         
-        cache.set(_cache_key, _stat_data);
-        cache.set(_cache_key_t, this.data.target_attribute_options);
+        CacheUtils.set(_cache_key, _stat_data);
         //console.log(_group_json);
     },
     hotspot: function () {
         var _cache_key = this.data.cache_key + "_hotspot";
-        this.data.hotspot = cache.get(_cache_key);
+        this.data.hotspot = CacheUtils.get(_cache_key);
         if (this.data.hotspot !== null) {
             return;
         }
@@ -111,7 +110,7 @@ var Main = {
         this.data.hotspot = _hotspot_result;
         this.add_stat_to_hotspot();
         
-        cache.set(_cache_key, _hotspot_result);
+        CacheUtils.set(_cache_key, _hotspot_result);
     },
     add_stat_to_hotspot: function () {
         //console.log(this.data.hotspot)
@@ -151,7 +150,7 @@ var Main = {
     },
     setup_view: function () {
         var _cache_key = this.data.cache_key + "_view";
-        this.data.view = cache.get(_cache_key);
+        this.data.view = CacheUtils.get(_cache_key);
         if (this.data.view !== null) {
             return;
         }
@@ -168,7 +167,7 @@ var Main = {
         }
         this.data.view = _view;
         
-        cache.set(_cache_key, _view);
+        CacheUtils.set(_cache_key, _view);
     },
     render: function () {
         var _render = this.data.view

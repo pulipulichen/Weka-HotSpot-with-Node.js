@@ -29,7 +29,8 @@ anova = require('anova');
 Mustache = require('mustache');
 
 // npm install --save node-file-cache
-cache = require('node-file-cache').create({
-    file: "node-file-cache.json",
-    life: 3600 * 24
-});
+node_file_cache = require('node-file-cache');
+//cache = require('node-file-cache').create({
+//    file: "node-file-cache.json",
+//    life: 3600 * 24
+//});

@@ -12,20 +12,20 @@ WekaHotSpotUtils = {
 
         // Local $cmd_weka = @comspec & ' /C Java -Dfile.encoding=utf-8 -cp ' & $extapp_weka & ' weka.Run ' & $weka_command & ' -t "' & $train_file & '" -c ' & $hotspot_targetIndex & ' -V ' & $param & ' -S ' & $hotspot_support & ' -M ' & $hotspot_max_branching_factor & ' -length ' & $hotspot_max_rule_length & ' -I 0.01 -L'
         return "%COMSPEC% /C Java -Dfile.encoding=utf-8 " 
-                + '-cp "' + cfg.weka.extapp_weka + '" weka.Run weka.associations.HotSpot '
-                + "-t " + _input_file_name + " "
-                + ' -c ' + cfg.weka.hotspot_targetIndex + ' '
-                + '-V ' + _option_index + " "
-                + ' -S ' + cfg.weka.hotspot_support + " "
-                + ' -M ' + cfg.weka.hotspot_max_branching_factor + " "
-                + ' -length ' + cfg.weka.hotspot_max_rule_length + " "
+                + ' -cp "' + cfg.weka.extapp_weka + '" weka.Run weka.associations.HotSpot '
+                + ' -t "' + _input_file_name + '" '
+                + ' -c ' + cfg.hotspot.targetIndex + ' '
+                + ' -V ' + _option_index + " "
+                + ' -S ' + cfg.hotspot.support + " "
+                + ' -M ' + cfg.hotspot.max_branching_factor + " "
+                + ' -length ' + cfg.hotspot.max_rule_length + " "
                 + ' -I 0.01 '
                 + _direction + " "
                 + _minimize_target;
     },
 
-    run_commands: function (_input_files, _output_dir) {
-        var _debug = true;
+    run_commands: function (_input_files) {
+        var _debug = false;
         
         var _output_result = {};    
         for (var _i = 0; _i < _input_files.length; _i++) {
@@ -79,7 +79,7 @@ WekaHotSpotUtils = {
                 
                 // 測試用，加快處理速度
                 if (_debug === true && _option_index > 1) {
-                    //break;
+                    break;
                 }
             }   
         }

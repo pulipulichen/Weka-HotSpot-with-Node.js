@@ -233,7 +233,7 @@ ChiSquareUtils = {
         };
     },
     sig_level: function (_p_value) {
-        var _alpha_levels = cfg.weka.stat_alpha.split(",");
+        var _alpha_levels = cfg.stat.alpha.split(",");
         var _level = -1;
         for (var _i = _alpha_levels.length - 1; _i >= 0; _i--) {
             var _alpha = parseNumber(_alpha_levels[_i]);
