@@ -1,0 +1,38 @@
+table { 
+    border-spacing: 0px;
+    border-collapse: collapse;
+}
+
+table, table td {
+	border-left-width: 0;
+	border-right-width: 0;
+}
+
+table td.text-right {
+    text-align: right;
+}
+
+table td.text-left {
+    text-align: left;
+}
+
+table td.text-center {
+    text-align: center;
+}
+
+table td.text-bottom, thead td {
+    vertical-align: bottom;
+}
+
+.lhs-item-display.highlight {
+    background-color: yellow;
+}
+
+.lhs-item-display {
+    color: gray;
+}
+
+.lhs-item-display.match {
+    color: black;
+    cursor: pointer;
+}

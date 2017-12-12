@@ -184,7 +184,7 @@ var Main = {
         
         // -------------------
         // 輸出到個別的檔案
-        var _full_report_body = [];
+        var _single_report = [];
         var _output_dir = this.data.output_dir;
         mkdir(_output_dir);
         for (var _file_name in _render) {
@@ -195,18 +195,29 @@ var Main = {
                             + _file_json.hotspot_max_table 
                             + "<hr />"
                             + _file_json.hotspot_min_table;
-            _full_report_body.push(_body_html);
-            fs.appendFile(_path, TemplateUtils.render("single-report", {
+            var _single_report_json = {
                 "file_name": _file_name,
+                "date": get_date_time(),
                 "body_html": _body_html
-            }));
+            };
+            _single_report.push(_single_report_json);
+            fs.writeFileSync(_path, TemplateUtils.render("single-report", _single_report_json));
         }
         
         var _full_report_path = _output_dir + "/" + "full-report-" + get_date_time() + ".html";
-        fs.appendFile(_full_report_path, TemplateUtils.render("full-report", {
-                "date": get_date_time(),
-                "single-report": _full_report_body
+        fs.writeFileSync(_full_report_path, TemplateUtils.render("full-report", {
+            "date": get_date_time(),
+            "single-report": _single_report
         }));
+        
+        // 複製其他檔案過去
+        var _style_files = get_style_files();
+        
+        for (var _i = 0; _i < _style_files.length; _i++) {
+            var _from_file = "./output-style/" + _style_files[_i];
+            var _to_file = _output_dir + "/" + _style_files[_i];
+            fs.createReadStream(_from_file).pipe(fs.createWriteStream(_to_file));
+        }
     }
 };
 

@@ -29,6 +29,19 @@ get_input_files = function () {
     return _input_files_qualified;
 };
 
+get_style_files = function () {
+    var _input_dir = './output-style/';
+    var _input_files = fs.readdirSync(_input_dir);
+
+    var _input_files_qualified = [];
+    for (var _i = 0; _i < _input_files.length; _i++) {
+        var _file_name = _input_files[_i];
+        _input_files_qualified.push(_file_name);
+    }
+    
+    return _input_files_qualified;
+};
+
 mkdir = function (_path) {
     if (fs.existsSync(_path) === false) {
         fs.mkdirSync(_path);

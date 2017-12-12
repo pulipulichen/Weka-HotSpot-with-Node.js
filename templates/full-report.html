@@ -1,13 +1,30 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Full report - {{ date }}</title>
+        <title>Full Report ({{ date }})</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
+        <a id="top" />
+        <h1>Full Report ({{ date }})</h1>
+        
+        <ul>
+            {{ #single-report }}
+            <li><a href="#{{ file_name }}">{{ file_name }}</a></li>
+            {{ /single-report }}
+        </ul>
+        
+        <hr />
         {{ #single-report }}
-            {{{ . }}}
+            <a id="{{ file_name }}" />
+            {{{ body_html }}}
+            <a href="#top" class="top">top</a>
         {{ /single-report }}
+        
+        
+        <script src="jquery.js"></script>
+        <script src="script.js"></script>
     </body>
 </html>
