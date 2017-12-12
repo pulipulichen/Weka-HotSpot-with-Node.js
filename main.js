@@ -33,7 +33,7 @@ var Main = {
         //TmpUtils.append(_full_report);
         
         this.render();
-        TmpUtils.append(this.data.render["example_input-weather.numeric"].stat_table);
+        TmpUtils.append(this.data.render["example_input-weather.numeric"].hotspot_max_table);
         
         console.log("======================");
         console.log("Finish!");
@@ -163,7 +163,7 @@ var Main = {
                     max: this.data.hotspot[_file_name]["max"],
                     min: this.data.hotspot[_file_name]["min"]
                 }
-            }
+            };
         }
         this.data.view = _view;
         
@@ -175,8 +175,15 @@ var Main = {
             var _r = {};
             var _stat_data = _render[_file_name]["stat"];
             _r["stat_table"] = TemplateUtils.render_stat_table(_file_name, _stat_data);
+            
+            // render_hotspot: function (_file_name, _direction, _hotspot_json) {
+            
             var _max_data = _render[_file_name]["hotspot"]["max"];
+            _r["hotspot_max_table"] = TemplateUtils.render_hotspot_table(_file_name, "Maximize", _max_data);
+            
             var _min_data = _render[_file_name]["hotspot"]["min"];
+            _r["hotspot_min_table"] = TemplateUtils.render_hotspot_table(_file_name, "Minimize", _min_data);
+            
             _render[_file_name] = _r;
         }
         

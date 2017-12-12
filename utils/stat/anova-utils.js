@@ -52,7 +52,8 @@ AnovaUtils = {
 
         for (var _c = 0; _c < _tukeyhsd_result.length; _c++) {
             var _p = _tukeyhsd_result[_c][1];
-            if (this.sig_level(_p) === 0) {
+            var _sig_level = this.sig_level(_p);
+            if (_sig_level === 0) {
                 continue;
             }
 
@@ -65,12 +66,25 @@ AnovaUtils = {
             var _group2_avg = _avg_data[_group2_name];
 
             if (_group1_avg > _group2_avg) {
-                _tukeyhsd_compare[_group1_name].push(_group1_name + " > " + _group2_name);
-                _tukeyhsd_compare[_group2_name].push(_group2_name + " < " + _group1_name);
+                _tukeyhsd_compare[_group1_name].push({
+                    "comparison": _group1_name + " > " + _group2_name,
+                    "sig-level": _sig_level
+                });
+                _tukeyhsd_compare[_group2_name].push({
+                    "comparison": _group2_name + " < " + _group1_name,
+                    "sig-level": _sig_level
+                });
             }
             else {
-                _tukeyhsd_compare[_group1_name].push(_group1_name + " < " + _group2_name);
-                _tukeyhsd_compare[_group2_name].push(_group2_name + " > " + _group1_name);
+                _tukeyhsd_compare[_group1_name].push({
+                    "comparison": _group1_name + " < " + _group2_name,
+                    "sig-level": _sig_level
+                });
+                _tukeyhsd_compare[_group2_name].push({
+                    "comparison": _group2_name + " > " + _group1_name,
+                    "sig-level": _sig_level
+                    
+                });
             }
         }
 

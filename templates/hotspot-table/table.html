@@ -1,10 +1,10 @@
 <table class="hotspot table" border="1">
     <caption>
-        {{ file_name}} HotSpot Result
+        {{ file_name}} HotSpot Result ({{ direction }})
     </caption>
     <thead>
         <tr>
-            <th>RHS</th>
+            <th>RHS ({{ rhs.attribute }})</th>
             <th>LHS</th>
             <th>Cover</th>
             <th title="Confidence">Conf.</th>
@@ -16,8 +16,8 @@
         </tr>
     </thead>
     <tbody>
-        {{ #group_html }}
+        {{ #group_func }}
             {{{ . }}}
-        {{ /group_html }}
+        {{ /group_func }}
     </tbody>
 </table>

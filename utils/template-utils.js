@@ -241,5 +241,86 @@ TemplateUtils = {
             }
         }
         return _group_td.join("\n");
+    },
+    
+    // -----------------------------------------
+    
+    render_hotspot: function (_file_name, _direction, _hotspot_json) {
+        var _this = this;
+        return this.render("hotspot-table/table.html", {
+            "file_name": _file_name, 
+            "direction": _direction,
+            "rhs": _hotspot_json["rhs"],
+            "lhs": _hotspot_json["lhs"],
+            "group_func": function () {
+                var _tr_array = [];
+                for (var _i = 0; _i < this.lhs.length; _i++ ) {
+                    var _html = "";
+                    
+                    if (_i === 0) {
+                        _html = _this.render_hotspot_rhs(this.rhs, this.lhs.length);
+                    }
+                    _html += _this.render_hotspot_lhs(this.lhs[_i]);
+                    
+                    _tr_array.push("<tr>" + _html + "</tr>");
+                }
+                return _tr_array;
+            }
+        });
+    },
+    
+    render_hotspot_rhs: function (_rhs, _lhs_length) {
+        return this.render("hotspot-table/th-rhs", {
+            "rhs": _rhs,
+            "lhs_length": _lhs_length
+        });
+    },
+    
+    render_hotspot_lhs: function (_lhs_item) {
+        var _this = this;
+        return this.render("hotspot-table/td-lhs", {
+            "lhs_item": _lhs_item,
+            "test_func": function () {
+                var _html = "";
+                var _test = _lhs_item["test"];
+                if (typeof(_test["f-score"]) !== "undefined") {
+                    // numeric
+                    _html = "f-score: <br />"
+                        + _this.json_decimal_rounding(_test["f-score"])
+                        + _this.get_sig_sign(_test["sig-level"]);
+                }
+                else {
+                    // nominal
+                    _html = _test["mode"] + ": <br />"
+                        + _this.json_decimal_rounding(_test["chisquare"])
+                        + _this.get_sig_sign(_test["sig-level"]);
+                }
+                return _html;
+            },
+            "comp_func": function () {
+                var _html = "";
+                var _comparison = _lhs_item["comparison"];
+                if (typeof(_lhs_item["test"]["f-score"]) !== "undefined") {
+                    if (_comparison.length > 0) {
+                        var _li = [];
+                        for (var _i = 0; _i < _comparison.length; _i++) {
+                            _li.push("<li>" 
+                                    + _comparison[_i]["comparison"] 
+                                    + _this.get_sig_sign(_comparison[_i]["sig-level"]) 
+                                    + "</li>");
+                        }
+                        _html = "<ul>" + _li.join("") + "</ul>";
+                    }
+                    else {
+                        _html = "-";
+                    }
+                }
+                else {
+                    _html = _this.json_decimal_rounding(_comparison["adj-residual"])
+                        + _this.get_sig_sign(_comparison["sig-level"]);
+                }
+                return _html;
+            }
+        });
     }
 };
