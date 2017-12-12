@@ -22,7 +22,8 @@ TemplateStatTable = {
         return TemplateUtils.render("stat-table/table", {
             file_name: _file_name,
             thead_html: _thead,
-            tbody_html: _tbody
+            tbody_html: _tbody,
+            tfoot_html: TemplateUtils.render("stat-table/tfoot", {tfoot_colspan: _target_attribute_options_count + 2})
         });
     },
     

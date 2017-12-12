@@ -24,17 +24,15 @@ table td.text-bottom, thead td {
     vertical-align: bottom;
 }
 
-.lhs-item-display.highlight {
-    background-color: yellow;
-}
-
-.lhs-item-display {
-    color: gray;
-}
-
-.lhs-item-display.match {
-    color: black;
+table.stat-table tbody tr th,
+table.stat-table tbody tr td,
+table.hotspot-table tbody tr td {
     cursor: pointer;
+}
+
+table.stat-table tr.highlight th,
+tr.highlight td {
+    background-color: yellow;
 }
 
 .text-indent-1 {

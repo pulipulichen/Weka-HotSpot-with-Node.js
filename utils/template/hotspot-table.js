@@ -13,7 +13,7 @@ TemplateHotspotTable = {
                 }
                 _html += _this.render_hotspot_lhs(_lhs[_j]);
 
-                _group_html_array.push('<tr data-lhs-attr="' + _lhs.attribute + '">' + _html + '</tr>');
+                _group_html_array.push('<tr data-lhs-attr="' + _lhs[_j].attribute + '">' + _html + '</tr>');
             }
         }
         
@@ -21,7 +21,8 @@ TemplateHotspotTable = {
             "file_name": _file_name, 
             "direction": _direction,
             "target_attr": _hotspot_json[0]["rhs"]["attribute"],
-            "group_html_array": _group_html_array
+            "group_html_array": _group_html_array,
+            "tfoot_html": TemplateUtils.render("hotspot-table/tfoot", {tfoot_colspan: 9})
         });
     },
     
