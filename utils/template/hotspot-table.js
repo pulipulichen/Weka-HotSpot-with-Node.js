@@ -17,12 +17,17 @@ TemplateHotspotTable = {
             }
         }
         
+        var _tfoot_html = TemplateUtils.render("hotspot-table/tfoot", {
+            tfoot_colspan: 9,
+            note_html_array: TemplateUtils.parse_notes(_hotspot_json)
+        });
+        
         return TemplateUtils.render("hotspot-table/table", {
             "file_name": _file_name, 
             "direction": _direction,
             "target_attr": _hotspot_json[0]["rhs"]["attribute"],
             "group_html_array": _group_html_array,
-            "tfoot_html": TemplateUtils.render("hotspot-table/tfoot", {tfoot_colspan: 9})
+            "tfoot_html": _tfoot_html
         });
     },
     
@@ -46,13 +51,24 @@ TemplateHotspotTable = {
                 if (typeof(_test["f-score"]) !== "undefined") {
                     // numeric
                     _html = '<span title="f-score">'
+                        + '<sup>a</sup>'
                         + TemplateUtils.json_decimal_rounding(_test["f-score"])
                         + TemplateUtils.get_sig_sign(_test["sig-level"]);
                 }
                 else {
                     // nominal
-                    _html = _test["mode"] + ": <br />"
-                        + TemplateUtils.json_decimal_rounding(_test["chisquare"])
+                    var _mode_abbr = 'c';
+                    var _mode = _test["mode"];
+                    if (_mode === "yates-corr") {
+                        _mode_abbr = "y";
+                    }
+                    else if (_mode === "fisher-exact") {
+                        _mode_abbr = "f";
+                    }
+                    
+                    
+                    _html =  TemplateUtils.json_decimal_rounding(_test["chisquare"])
+                        + '<sup>' + _mode_abbr + "</sup>"
                         + TemplateUtils.get_sig_sign(_test["sig-level"]);
                 }
                 return _html;
@@ -66,6 +82,7 @@ TemplateHotspotTable = {
                         for (var _i = 0; _i < _comparison.length; _i++) {
                             _li.push("<div>" 
                                     + _comparison[_i]["comparison"] 
+                                    + "<sup>t</sup>"
                                     + TemplateUtils.get_sig_sign(_comparison[_i]["sig-level"]) 
                                     + "</div>");
                         }
@@ -78,6 +95,7 @@ TemplateHotspotTable = {
                 }
                 else {
                     _html = TemplateUtils.json_decimal_rounding(_comparison["adj-residual"])
+                        + '<sup>r</sup>'
                         + TemplateUtils.get_sig_sign(_comparison["sig-level"]);
                 }
                 return _html;

@@ -1,10 +1,9 @@
 <tfoot>
     <tr>
         <td colspan="{{ tfoot_colspan }}">
-        Note:
-        {{ #note }}
-            {{{ . }}}
-        {{ /note }}
+            {{ #note_html_array }}
+            <div>{{{ . }}}</div>
+            {{ /note_html_array }}
         </td>
     </tr>
 </tfoot>

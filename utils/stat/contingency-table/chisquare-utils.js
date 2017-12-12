@@ -178,6 +178,8 @@ ChiSquareUtils = {
                 // 我要這格
 
                 var _sig_level = this.zscore_sig_level(_adj_residual);
+                
+                var _is_sig = (_sig_level > 0);
                 //console.log([_x_var_name, _y_var_name, _adj_residual, _sig_level]);
                 
                 //var _y = ( Math.pow((Math.abs(_residual) - 0.5), 2) / _exp );
@@ -192,7 +194,8 @@ ChiSquareUtils = {
                     "std-residual": _std_residual,
                     "yates-residual": ( Math.pow((Math.abs(_residual) - 0.5), 2) / _exp ),
                     "adj-residual": _adj_residual,
-                    "sig-level": _sig_level
+                    "sig-level": _sig_level,
+                    "adj-residual-is-sig": _is_sig,
                 };
             }
         }

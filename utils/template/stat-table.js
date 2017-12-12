@@ -19,11 +19,16 @@ TemplateStatTable = {
         
         var _tbody = TemplateUtils.render("stat-table/tbody", {tr: _tbody_tr_array});
         
+        var _tfoot_html = TemplateUtils.render("stat-table/tfoot", {
+            tfoot_colspan: _target_attribute_options_count + 2,
+            note_html_array: TemplateUtils.parse_notes(_stat_data)
+        });
+        
         return TemplateUtils.render("stat-table/table", {
             file_name: _file_name,
             thead_html: _thead,
             tbody_html: _tbody,
-            tfoot_html: TemplateUtils.render("stat-table/tfoot", {tfoot_colspan: _target_attribute_options_count + 2})
+            tfoot_html: _tfoot_html
         });
     },
     
@@ -47,10 +52,10 @@ TemplateStatTable = {
             display_sign: function () {
                 // {{ chi_square.mode }}: {{ chi_square.chisquare }} {{ chi_square.sig-level }}
                 var _element = this;
-                var _output = ["f-score: "
-                    , TemplateUtils.json_decimal_rounding(_element.anova["f-score"])
-                    , TemplateUtils.get_sig_sign(_element.anova["sig-level"])];
-                return _output.join("");
+                var _output = TemplateUtils.json_decimal_rounding(_element.anova["f-score"])
+                    + "<sup>a</sup>"
+                    + TemplateUtils.get_sig_sign(_element.anova["sig-level"]);
+                return _output;
             }
         });
     },
@@ -81,7 +86,9 @@ TemplateStatTable = {
                 _group_td.push(TemplateUtils.render("stat-table/tbody-tr-numeric-list", {
                    "list": _array,
                    "comp_func": function () {
-                       return this.comparison + TemplateUtils.get_sig_sign(this["sig-level"]);
+                       return this.comparison 
+                               + "<sup>t</sup>"
+                               + TemplateUtils.get_sig_sign(this["sig-level"]);
                    }
                 }));
             }
@@ -117,10 +124,20 @@ TemplateStatTable = {
             display_sign: function () {
                 // {{ chi_square.mode }}: {{ chi_square.chisquare }} {{ chi_square.sig-level }}
                 var _element = this;
-                var _output = [_element.chi_square.mode, ": "
-                    , TemplateUtils.json_decimal_rounding(_element.chi_square.chisquare)
-                    , TemplateUtils.get_sig_sign(_element.chi_square["sig-level"])];
-                return _output.join("");
+                
+                var _mode_abbr = 'c';
+                var _mode = _element.chi_square.mode;
+                if (_mode === "yates-corr") {
+                    _mode_abbr = "y";
+                }
+                else if (_mode === "fisher-exact") {
+                    _mode_abbr = "f";
+                }
+                
+                var _output = TemplateUtils.json_decimal_rounding(_element.chi_square.chisquare)
+                    + '<sup>' + _mode_abbr + '</sup>'
+                    + TemplateUtils.get_sig_sign(_element.chi_square["sig-level"]);
+                return _output;
             }
         });
     },
@@ -135,10 +152,11 @@ TemplateStatTable = {
                     "group-sig": _group_sig,
                     "display_sig": function () {
                         var _element = this;
-                        var _output = [_element.option, ": "
-                            , TemplateUtils.json_decimal_rounding(_element["adj-residual"])
-                            , TemplateUtils.get_sig_sign(_element["sig-level"])];
-                        return _output.join("");
+                        var _output = _element.option + ": "
+                            + TemplateUtils.json_decimal_rounding(_element["adj-residual"])
+                            + '<sup>r</sup>' 
+                            + TemplateUtils.get_sig_sign(_element["sig-level"]);
+                        return _output;
                     }
                 }));
             }

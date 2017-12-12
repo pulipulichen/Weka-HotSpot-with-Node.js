@@ -4,6 +4,11 @@ table {
     border-bottom-width: 0;
 }
 
+table caption {
+    font-size: large;
+    font-weight: bold;
+}
+
 table tbody {
     border-bottom-width: 1px;
 }
@@ -15,6 +20,10 @@ table tfoot td {
 table, table td, table th {
     border-left-width: 0;
     border-right-width: 0;
+}
+table td, table th {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
 }
 
 table td.text-right {
@@ -47,4 +56,9 @@ tr.highlight td {
 .text-indent-1 {
     text-indent: -1em;
     padding-left: 1em;
+}
+
+hr {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }

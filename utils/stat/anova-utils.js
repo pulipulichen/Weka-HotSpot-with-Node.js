@@ -68,22 +68,25 @@ AnovaUtils = {
             if (_group1_avg > _group2_avg) {
                 _tukeyhsd_compare[_group1_name].push({
                     "comparison": _group1_name + " > " + _group2_name,
+                    "tukeyhsd-p-value": _p,
                     "sig-level": _sig_level
                 });
                 _tukeyhsd_compare[_group2_name].push({
                     "comparison": _group2_name + " < " + _group1_name,
+                    "tukeyhsd-p-value": _p,
                     "sig-level": _sig_level
                 });
             }
             else {
                 _tukeyhsd_compare[_group1_name].push({
                     "comparison": _group1_name + " < " + _group2_name,
+                    "tukeyhsd-p-value": _p,
                     "sig-level": _sig_level
                 });
                 _tukeyhsd_compare[_group2_name].push({
                     "comparison": _group2_name + " > " + _group1_name,
+                    "tukeyhsd-p-value": _p,
                     "sig-level": _sig_level
-                    
                 });
             }
         }
