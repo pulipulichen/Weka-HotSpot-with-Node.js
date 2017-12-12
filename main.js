@@ -24,16 +24,10 @@ var Main = {
         this.stat();
         this.hotspot();
         this.setup_view();
-        //this.add_stat_to_hotspot();
         
-        //TmpUtils.append(this.data.stat);
-        //TmpUtils.append(this.data.hotspot);
-        //TmpUtils.append(this.data.view);
-        //var _full_report = TemplateUtils.render("full-report", { view: this.data.view });
-        //TmpUtils.append(_full_report);
         
         this.render();
-        TmpUtils.append(this.data.render["example_input-weather.numeric"].hotspot_max_table);
+        //TmpUtils.append(this.data.render["example_input-weather.numeric"].hotspot_max_table);
         
         console.log("======================");
         console.log("Finish!");
@@ -56,7 +50,6 @@ var Main = {
     },
     stat: function () {
         var _cache_key = this.data.cache_key + "_stat";
-        var _cache_key_t = this.data.cache_key + "_target";
         this.data.stat = CacheUtils.get(_cache_key);
         if (this.data.stat !== null) {
             return;
@@ -188,6 +181,32 @@ var Main = {
         }
         
         this.data.render = _render;
+        
+        // -------------------
+        // 輸出到個別的檔案
+        var _full_report_body = [];
+        var _output_dir = this.data.output_dir;
+        mkdir(_output_dir);
+        for (var _file_name in _render) {
+            var _path = _output_dir + "/" + _file_name + ".html";
+            var _file_json = _render[_file_name];
+            var _body_html = _file_json.stat_table 
+                            + "<hr />"
+                            + _file_json.hotspot_max_table 
+                            + "<hr />"
+                            + _file_json.hotspot_min_table;
+            _full_report_body.push(_body_html);
+            fs.appendFile(_path, TemplateUtils.render("single-report", {
+                "file_name": _file_name,
+                "body_html": _body_html
+            }));
+        }
+        
+        var _full_report_path = _output_dir + "/" + "full-report-" + get_date_time() + ".html";
+        fs.appendFile(_full_report_path, TemplateUtils.render("full-report", {
+                "date": get_date_time(),
+                "single-report": _full_report_body
+        }));
     }
 };
 

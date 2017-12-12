@@ -169,12 +169,16 @@ TemplateUtils = {
     
     render_stat_tr_numeric_list: function (_target_attribute_options_count, _group_json) {
         var _group_td = [];
+        var _this = this;
         for (var _group_name in _group_json) {
             var _array = this.json_decimal_rounding(_group_json[_group_name]);
             
             if (_array.length > 0) { 
                 _group_td.push(this.render("stat-table/tbody-tr-numeric-list", {
-                   "list": _array
+                   "list": _array,
+                   "comp_func": function () {
+                       return this.comparison + _this.get_sig_sign(this["sig-level"]);
+                   }
                 }));
             }
             else {
@@ -283,7 +287,7 @@ TemplateUtils = {
         return this.render("hotspot-table/td-lhs", {
             "lhs_item": _lhs_item,
             "conf_func": function () {
-                return _lhs_item["cover"] * 100;
+                return _lhs_item["conf"] * 100;
             },
             "test_func": function () {
                 var _html = "";
