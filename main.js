@@ -187,6 +187,10 @@ var Main = {
 TmpUtils.remove();
 Main.exec();
 
+//console.log(jStat.tukeyhsd([
+//    [70,83,68,64,69],[85,80,65,72,71,75,75,72,81]
+//]))
+
 //cache.init({'ttl':10000});
 /*
 console.log(cache.get("key"));

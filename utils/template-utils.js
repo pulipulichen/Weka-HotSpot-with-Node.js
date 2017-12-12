@@ -58,27 +58,29 @@ TemplateUtils = {
         }
         return _sig;
     },
-    decimal_rounding: function (_number) {
-        var _cfg_decimal_rounding = parseNumber(cfg.stat.decimal_rounding);
+    decimal_rounding: function (_number, _cfg_decimal_rounding) {
+        if (_cfg_decimal_rounding === undefined) {
+            _cfg_decimal_rounding = parseNumber(cfg.stat.decimal_rounding);
+        }
         _number = _number * Math.pow(10, _cfg_decimal_rounding);
         _number = Math.round(_number);
         return _number / Math.pow(10, _cfg_decimal_rounding);
     },
-    json_decimal_rounding: function (_json) {
+    json_decimal_rounding: function (_json, _decimal_rounding) {
         if (typeof(_json) === "number") {
-            return this.decimal_rounding(_json);
+            return this.decimal_rounding(_json, _decimal_rounding);
         }
         else if (Array.isArray(_json)) {
             var _output_array = [];
             for (var _i = 0; _i < _json.length; _i++) {
-                _output_array.push(this.json_decimal_rounding(_json[_i]));
+                _output_array.push(this.json_decimal_rounding(_json[_i], _decimal_rounding));
             }
             return _output_array;
         }
         else if (typeof(_json) === "object") {
             var _output_json = {};
             for (var _i in _json) {
-                _output_json[_i] = this.json_decimal_rounding(_json[_i]);
+                _output_json[_i] = this.json_decimal_rounding(_json[_i], _decimal_rounding);
             }
             return _output_json;
         }
@@ -124,9 +126,71 @@ TemplateUtils = {
     // --------------------
     
     render_stat_tr_numeric: function (_attr, _attr_data, _target_attribute_options_count) {
-        return "<tr><td>numeric</td></tr>";
+        return this.render("stat-table/tbody-tr-numeric", {
+            attr: _attr,
+            test_html: this.render_stat_tr_numeric_test(_target_attribute_options_count, _attr_data),
+            avg_html: this.render_stat_tr_numeric_indication(_target_attribute_options_count, _attr_data["avg"]),
+            stddev_html: this.render_stat_tr_numeric_indication(_target_attribute_options_count, _attr_data["stddev"]),
+            tukeyhsd_html: this.render_stat_tr_numeric_list(_target_attribute_options_count, _attr_data["tukeyhsd"])
+        });
     },
     
+    render_stat_tr_numeric_test: function (_target_attribute_options_count, _attr_data) {
+        var _this = this;
+        return this.render("stat-table/tbody-tr-numeric-test", {
+            target_attribute_options_count: _target_attribute_options_count,
+            anova: this.json_decimal_rounding(_attr_data["anova"]),
+            display_sign: function () {
+                // {{ chi_square.mode }}: {{ chi_square.chisquare }} {{ chi_square.sig-level }}
+                var _element = this;
+                var _output = ["F-score: "
+                    , _this.json_decimal_rounding(_element.anova["f-score"])
+                    , _this.get_sig_sign(_element.anova["sig-level"])];
+                return _output.join("");
+            }
+        });
+    },
+    
+    render_stat_tr_numeric_indication: function (_target_attribute_options_count, _group_json) {
+        var _group_td = [];
+        for (var _group_name in _group_json) {
+            _group_td.push(this.render("stat-table/tbody-tr-numeric-indication", {
+               "indication": this.json_decimal_rounding(_group_json[_group_name])
+            }));
+        }
+        if (_group_td.length === 0) {
+            //console.log(_target_attribute_options_count);
+            _group_td.push(this.render("stat-table/tbody-tr-empty", {
+                "target_attribute_options_count": _target_attribute_options_count
+            }));
+        }
+        return _group_td.join("\n");
+    },
+    
+    render_stat_tr_numeric_list: function (_target_attribute_options_count, _group_json) {
+        var _group_td = [];
+        for (var _group_name in _group_json) {
+            var _array = this.json_decimal_rounding(_group_json[_group_name]);
+            
+            if (_array.length > 0) { 
+                _group_td.push(this.render("stat-table/tbody-tr-numeric-list", {
+                   "list": _array
+                }));
+            }
+            else {
+                _group_td.push(this.render("stat-table/tbody-tr-td-empty", {
+                    "target_attribute_options_count": 1
+                }));
+            }
+        }
+        if (_group_td.length === 0) {
+            //console.log(_target_attribute_options_count);
+            _group_td.push(this.render("stat-table/tbody-tr-td-empty", {
+                "target_attribute_options_count": _target_attribute_options_count
+            }));
+        }
+        return _group_td.join("\n");
+    },
     // --------------------
     
     render_stat_tr_nominal: function (_attr, _attr_data, _target_attribute_options_count) {
@@ -138,25 +202,43 @@ TemplateUtils = {
         });
     },
     render_stat_tr_nominal_test: function (_target_attribute_options_count, _chi_suqare) {
+        var _this = this;
         return this.render("stat-table/tbody-tr-nominal-test", {
             target_attribute_options_count: _target_attribute_options_count,
-            chi_square: this.json_decimal_rounding(_chi_suqare)
+            chi_square: this.json_decimal_rounding(_chi_suqare),
+            display_sign: function () {
+                // {{ chi_square.mode }}: {{ chi_square.chisquare }} {{ chi_square.sig-level }}
+                var _element = this;
+                var _output = [_element.chi_square.mode, ": "
+                    , _this.json_decimal_rounding(_element.chi_square.chisquare)
+                    , _this.get_sig_sign(_element.chi_square["sig-level"])];
+                return _output.join("");
+            }
         });
     },
     render_stat_tr_nominal_group: function (_target_attribute_options_count, _group_json) {
         var _group_td = [];
         var _this = this;
         for (var _group_name in _group_json) {
-            _group_td.push(this.render("stat-table/tbody-tr-nominal-group", {
-                "group-sig": this.json_decimal_rounding(_group_json[_group_name]),
-                "display_sig": function () {
-                    var _element = this;
-                    var _output = [_element.option, ": "
-                        , _this.json_decimal_rounding(_element["adj-residual"])
-                        , _this.get_sig_sign(_element["sig-level"])];
-                    return _output.join("");
-                }
-            }));
+            var _group_sig = this.json_decimal_rounding(_group_json[_group_name]);
+            
+            if (_group_sig.length > 0) {
+                _group_td.push(this.render("stat-table/tbody-tr-nominal-group", {
+                    "group-sig": _group_sig,
+                    "display_sig": function () {
+                        var _element = this;
+                        var _output = [_element.option, ": "
+                            , _this.json_decimal_rounding(_element["adj-residual"])
+                            , _this.get_sig_sign(_element["sig-level"])];
+                        return _output.join("");
+                    }
+                }));
+            }
+            else {
+                _group_td.push(this.render("stat-table/tbody-tr-td-empty", {
+                    "target_attribute_options_count": 1
+                }));
+            }
         }
         return _group_td.join("\n");
     }

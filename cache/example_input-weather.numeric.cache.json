@@ -100,25 +100,21 @@
             },
             "temperature": {
               "anova": {
-                "f-score": 0.17849395723582148,
-                "p-value": 0.679574831306939,
+                "f-score": 1.4289257871823466,
+                "p-value": 0.2532909487243029,
                 "sig-level": 0
               },
               "avg": {
-                "no": 74.6,
-                "yes": 73
+                "no": 70.8,
+                "yes": 75.11111111111111
               },
               "stddev": {
-                "no": 7.059745037889116,
-                "yes": 5.811865258054231
+                "no": 6.43117407632541,
+                "yes": 5.724109721062781
               },
               "tukeyhsd": {
-                "no": [
-                  "no > yes"
-                ],
-                "yes": [
-                  "yes < no"
-                ]
+                "no": [],
+                "yes": []
               }
             },
             "humidity": {
@@ -151,7 +147,10 @@
                 "sig-level": 0,
                 "mode": "fisher-exact"
               },
-              "group-sig": {},
+              "group-sig": {
+                "no": [],
+                "yes": []
+              },
               "cell": {
                 "no": {
                   "FALSE": {
@@ -191,7 +190,7 @@
           }
         }
       },
-      "life": 1513135178040,
+      "life": 1513145381113,
       "tags": []
     },
     {
@@ -210,8 +209,8 @@
                 {
                   "length": 0,
                   "attribute": "temperature",
-                  "operator": ">",
-                  "value": 83,
+                  "operator": "<=",
+                  "value": 64,
                   "cover": 100,
                   "match_instances": 1,
                   "population": 1,
@@ -220,13 +219,11 @@
                   "lev": 0.05,
                   "conv": 0.64,
                   "test": {
-                    "f-score": 0.17849395723582148,
-                    "p-value": 0.679574831306939,
+                    "f-score": 1.4289257871823466,
+                    "p-value": 0.2532909487243029,
                     "sig-level": 0
                   },
-                  "comparison": [
-                    "no > yes"
-                  ]
+                  "comparison": []
                 },
                 {
                   "length": 0,
@@ -387,8 +384,8 @@
                 {
                   "length": 0,
                   "attribute": "temperature",
-                  "operator": "<=",
-                  "value": 64,
+                  "operator": ">",
+                  "value": 83,
                   "cover": 100,
                   "match_instances": 1,
                   "population": 1,
@@ -397,13 +394,11 @@
                   "lev": 0.03,
                   "conv": 0.36,
                   "test": {
-                    "f-score": 0.17849395723582148,
-                    "p-value": 0.679574831306939,
+                    "f-score": 1.4289257871823466,
+                    "p-value": 0.2532909487243029,
                     "sig-level": 0
                   },
-                  "comparison": [
-                    "yes < no"
-                  ]
+                  "comparison": []
                 },
                 {
                   "length": 0,
@@ -536,7 +531,7 @@
           ]
         }
       },
-      "life": 1513135353858,
+      "life": 1513145520228,
       "tags": []
     },
     {
@@ -640,25 +635,21 @@
               },
               "temperature": {
                 "anova": {
-                  "f-score": 0.17849395723582148,
-                  "p-value": 0.679574831306939,
+                  "f-score": 1.4289257871823466,
+                  "p-value": 0.2532909487243029,
                   "sig-level": 0
                 },
                 "avg": {
-                  "no": 74.6,
-                  "yes": 73
+                  "no": 70.8,
+                  "yes": 75.11111111111111
                 },
                 "stddev": {
-                  "no": 7.059745037889116,
-                  "yes": 5.811865258054231
+                  "no": 6.43117407632541,
+                  "yes": 5.724109721062781
                 },
                 "tukeyhsd": {
-                  "no": [
-                    "no > yes"
-                  ],
-                  "yes": [
-                    "yes < no"
-                  ]
+                  "no": [],
+                  "yes": []
                 }
               },
               "humidity": {
@@ -691,7 +682,10 @@
                   "sig-level": 0,
                   "mode": "fisher-exact"
                 },
-                "group-sig": {},
+                "group-sig": {
+                  "no": [],
+                  "yes": []
+                },
                 "cell": {
                   "no": {
                     "FALSE": {
@@ -743,8 +737,8 @@
                   {
                     "length": 0,
                     "attribute": "temperature",
-                    "operator": ">",
-                    "value": 83,
+                    "operator": "<=",
+                    "value": 64,
                     "cover": 100,
                     "match_instances": 1,
                     "population": 1,
@@ -753,13 +747,11 @@
                     "lev": 0.05,
                     "conv": 0.64,
                     "test": {
-                      "f-score": 0.17849395723582148,
-                      "p-value": 0.679574831306939,
+                      "f-score": 1.4289257871823466,
+                      "p-value": 0.2532909487243029,
                       "sig-level": 0
                     },
-                    "comparison": [
-                      "no > yes"
-                    ]
+                    "comparison": []
                   },
                   {
                     "length": 0,
@@ -920,8 +912,8 @@
                   {
                     "length": 0,
                     "attribute": "temperature",
-                    "operator": "<=",
-                    "value": 64,
+                    "operator": ">",
+                    "value": 83,
                     "cover": 100,
                     "match_instances": 1,
                     "population": 1,
@@ -930,13 +922,11 @@
                     "lev": 0.03,
                     "conv": 0.36,
                     "test": {
-                      "f-score": 0.17849395723582148,
-                      "p-value": 0.679574831306939,
+                      "f-score": 1.4289257871823466,
+                      "p-value": 0.2532909487243029,
                       "sig-level": 0
                     },
-                    "comparison": [
-                      "yes < no"
-                    ]
+                    "comparison": []
                   },
                   {
                     "length": 0,
@@ -1070,7 +1060,7 @@
           }
         }
       },
-      "life": 1513135353886,
+      "life": 1513145520259,
       "tags": []
     }
   ]

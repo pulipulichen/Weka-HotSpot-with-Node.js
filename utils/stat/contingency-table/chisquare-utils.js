@@ -24,10 +24,10 @@ ChiSquareUtils = {
         for (var _x in _cell_json) {
             for (var _y in _cell_json[_x]) {
                 var _sig_level = _cell_json[_x][_y]["sig-level"];
+                if (typeof(_group_sig[_x]) === "undefined") {
+                    _group_sig[_x] = [];
+                }
                 if (_sig_level > 0) {
-                    if (typeof(_group_sig[_x]) === "undefined") {
-                        _group_sig[_x] = [];
-                    }
                     _group_sig[_x].push({
                         "option": _y,
                         "adj-residual": _cell_json[_x][_y]["adj-residual"],

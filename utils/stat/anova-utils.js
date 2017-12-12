@@ -52,7 +52,7 @@ AnovaUtils = {
 
         for (var _c = 0; _c < _tukeyhsd_result.length; _c++) {
             var _p = _tukeyhsd_result[_c][1];
-            if (this.sig_level(_p) === -1) {
+            if (this.sig_level(_p) === 0) {
                 continue;
             }
 
