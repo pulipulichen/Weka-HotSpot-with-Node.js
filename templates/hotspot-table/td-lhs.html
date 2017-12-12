@@ -6,11 +6,8 @@
 <td class="lhs cover-instance" align="right">
     {{ lhs_item.match_instances }} / {{ lhs_item.population }}
 </td>
-<td class="lhs cover" align="left">
-    {{ lhs_item.cover }}%
-</td>
 <td class="lhs conf" align="right">
-    {{ lhs_item.conf }}%
+    {{ lhs_item.conf_func }}%
 </td>
 <td class="lhs lift" align="right">
     {{ lhs_item.lift }}
@@ -22,8 +19,8 @@
     {{ lhs_item.conv }}
 </td>
 <td class="lhs test">
-    {{ test_func }}
+    {{{ test_func }}}
 </td>
 <td class="lhs comp">
-    {{ comp_func }}
+    {{{ comp_func }}}
 </td>

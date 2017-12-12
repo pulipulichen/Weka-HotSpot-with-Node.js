@@ -245,27 +245,29 @@ TemplateUtils = {
     
     // -----------------------------------------
     
-    render_hotspot: function (_file_name, _direction, _hotspot_json) {
+    render_hotspot_table: function (_file_name, _direction, _hotspot_json) {
         var _this = this;
-        return this.render("hotspot-table/table.html", {
+        var _group_html_array = [];
+        for (var _i = 0; _i < _hotspot_json.length; _i++) {
+            var _rhs = _hotspot_json[_i]["rhs"];
+            var _lhs = _hotspot_json[_i]["lhs"];
+            for (var _j = 0; _j < _lhs.length; _j++ ) {
+                var _html = "";
+
+                if (_j === 0) {
+                    _html = _this.render_hotspot_rhs(_rhs, _lhs.length);
+                }
+                _html += _this.render_hotspot_lhs(_lhs[_j]);
+
+                _group_html_array.push("<tr>" + _html + "</tr>");
+            }
+        }
+        
+        return this.render("hotspot-table/table", {
             "file_name": _file_name, 
             "direction": _direction,
-            "rhs": _hotspot_json["rhs"],
-            "lhs": _hotspot_json["lhs"],
-            "group_func": function () {
-                var _tr_array = [];
-                for (var _i = 0; _i < this.lhs.length; _i++ ) {
-                    var _html = "";
-                    
-                    if (_i === 0) {
-                        _html = _this.render_hotspot_rhs(this.rhs, this.lhs.length);
-                    }
-                    _html += _this.render_hotspot_lhs(this.lhs[_i]);
-                    
-                    _tr_array.push("<tr>" + _html + "</tr>");
-                }
-                return _tr_array;
-            }
+            "target_attr": _hotspot_json[0]["rhs"]["attribute"],
+            "group_html_array": _group_html_array
         });
     },
     
@@ -280,6 +282,9 @@ TemplateUtils = {
         var _this = this;
         return this.render("hotspot-table/td-lhs", {
             "lhs_item": _lhs_item,
+            "conf_func": function () {
+                return _lhs_item["cover"] * 100;
+            },
             "test_func": function () {
                 var _html = "";
                 var _test = _lhs_item["test"];
@@ -304,12 +309,13 @@ TemplateUtils = {
                     if (_comparison.length > 0) {
                         var _li = [];
                         for (var _i = 0; _i < _comparison.length; _i++) {
-                            _li.push("<li>" 
+                            _li.push("<div>" 
                                     + _comparison[_i]["comparison"] 
                                     + _this.get_sig_sign(_comparison[_i]["sig-level"]) 
-                                    + "</li>");
+                                    + "</div>");
                         }
-                        _html = "<ul>" + _li.join("") + "</ul>";
+                        //_html = "<ul>" + _li.join("") + "</ul>";
+                        _html = _li.join("");
                     }
                     else {
                         _html = "-";

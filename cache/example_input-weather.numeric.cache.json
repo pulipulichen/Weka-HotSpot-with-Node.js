@@ -133,10 +133,16 @@
               },
               "tukeyhsd": {
                 "no": [
-                  "no > yes"
+                  {
+                    "comparison": "no > yes",
+                    "sig-level": 1
+                  }
                 ],
                 "yes": [
-                  "yes < no"
+                  {
+                    "comparison": "yes < no",
+                    "sig-level": 1
+                  }
                 ]
               }
             },
@@ -190,7 +196,7 @@
           }
         }
       },
-      "life": 1513145381113,
+      "life": 1513168370871,
       "tags": []
     },
     {
@@ -269,7 +275,10 @@
                     "sig-level": 1
                   },
                   "comparison": [
-                    "no > yes"
+                    {
+                      "comparison": "no > yes",
+                      "sig-level": 1
+                    }
                   ]
                 },
                 {
@@ -352,7 +361,10 @@
                     "sig-level": 1
                   },
                   "comparison": [
-                    "yes < no"
+                    {
+                      "comparison": "yes < no",
+                      "sig-level": 1
+                    }
                   ]
                 },
                 {
@@ -531,7 +543,7 @@
           ]
         }
       },
-      "life": 1513145520228,
+      "life": 1513168497085,
       "tags": []
     },
     {
@@ -668,10 +680,16 @@
                 },
                 "tukeyhsd": {
                   "no": [
-                    "no > yes"
+                    {
+                      "comparison": "no > yes",
+                      "sig-level": 1
+                    }
                   ],
                   "yes": [
-                    "yes < no"
+                    {
+                      "comparison": "yes < no",
+                      "sig-level": 1
+                    }
                   ]
                 }
               },
@@ -797,7 +815,10 @@
                       "sig-level": 1
                     },
                     "comparison": [
-                      "no > yes"
+                      {
+                        "comparison": "no > yes",
+                        "sig-level": 1
+                      }
                     ]
                   },
                   {
@@ -880,7 +901,10 @@
                       "sig-level": 1
                     },
                     "comparison": [
-                      "yes < no"
+                      {
+                        "comparison": "yes < no",
+                        "sig-level": 1
+                      }
                     ]
                   },
                   {
@@ -1060,7 +1084,7 @@
           }
         }
       },
-      "life": 1513145520259,
+      "life": 1513168497110,
       "tags": []
     }
   ]
