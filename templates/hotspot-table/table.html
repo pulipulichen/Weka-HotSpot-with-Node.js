@@ -1,0 +1,23 @@
+<table class="hotspot table" border="1">
+    <caption>
+        {{ file_name}} HotSpot Result
+    </caption>
+    <thead>
+        <tr>
+            <th>RHS</th>
+            <th>LHS</th>
+            <th>Cover</th>
+            <th title="Confidence">Conf.</th>
+            <th>Lift.</th>
+            <th title="Leverage">Lev.</th>
+            <th title="Conviction">Conv.</th>
+            <th>Test</th>
+            <th title="comparation">Comp.</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{ #group_html }}
+            {{{ . }}}
+        {{ /group_html }}
+    </tbody>
+</table>
