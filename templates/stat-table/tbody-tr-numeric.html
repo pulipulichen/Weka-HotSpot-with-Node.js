@@ -1,27 +1,22 @@
-<tr>
-    <th rowspan="4">
+<tr data-lhs-attr="{{ attr }}">
+    <th class="attr text-indent-1" rowspan="3" valign="top" align="left">
         {{ attr }}
+        {{{ test_html }}}
     </th>
-    <th>
-        Test
-    </th>
-    {{{ test_html }}}
-</tr>
-<tr>
-    <th>
+    <th valign="top" align="left">
         Avg.
     </th>
     {{{ avg_html }}}
 </tr>
-<tr>
-    <th>
+<tr data-lhs-attr="{{ attr }}">
+    <th valign="top" align="left">
         Stddev.
     </th>
     {{{ stddev_html }}}
 </tr>
-<tr>
-    <th>
-        TukeyHSD.
+<tr data-lhs-attr="{{ attr }}">
+    <th valign="top" align="left">
+        TukeyHSD
     </th>
     {{{ tukeyhsd_html }}}
 </tr>

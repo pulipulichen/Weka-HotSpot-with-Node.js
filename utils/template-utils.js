@@ -263,7 +263,7 @@ TemplateUtils = {
                 }
                 _html += _this.render_hotspot_lhs(_lhs[_j]);
 
-                _group_html_array.push("<tr>" + _html + "</tr>");
+                _group_html_array.push('<tr data-lhs-attr="' + _lhs.attribute + '">' + _html + '</tr>');
             }
         }
         

@@ -3,9 +3,9 @@ table {
     border-collapse: collapse;
 }
 
-table, table td {
-	border-left-width: 0;
-	border-right-width: 0;
+table, table td, table th {
+    border-left-width: 0;
+    border-right-width: 0;
 }
 
 table td.text-right {
@@ -35,4 +35,10 @@ table td.text-bottom, thead td {
 .lhs-item-display.match {
     color: black;
     cursor: pointer;
+}
+
+.stat-table th.attr, 
+.hotspot td.lhs.rule {
+    text-indent: -1em;
+    padding-left: 1em;
 }
