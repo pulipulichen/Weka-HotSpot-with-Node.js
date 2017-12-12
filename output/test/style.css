@@ -37,8 +37,7 @@ table td.text-bottom, thead td {
     cursor: pointer;
 }
 
-.stat-table th.attr, 
-.hotspot td.lhs.rule {
+.text-indent-1 {
     text-indent: -1em;
     padding-left: 1em;
 }

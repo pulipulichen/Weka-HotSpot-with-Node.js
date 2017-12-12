@@ -1,5 +1,7 @@
-<th rowspan="{{ lhs_length }}" valign="top" align="left">
+<th class="rhs text-indent-1" rowspan="{{ lhs_length }}" valign="top" align="left">
     {{ rhs.value }} 
     <br />
-    [{{ rhs.match_instances }}/{{ rhs.population }}]
+    <span class="cover" style="font-weight: normal;">
+        [{{ rhs.match_instances }}/{{ rhs.population }}]
+    </span>
 </th>

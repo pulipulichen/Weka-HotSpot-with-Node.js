@@ -15,6 +15,8 @@ require('./utils/stat/contingency-table/fisher-exact-test.js');
 require('./utils/stat/contingency-table/tau.js');
 require('./lib/statistics-distributions.js');
 require('./utils/template-utils.js');
+require('./utils/template/stat-table.js');
+require('./utils/template/hotspot-table.js');
 
 var Main = {
     exec: function () {
@@ -167,15 +169,15 @@ var Main = {
         for (var _file_name in _render) {
             var _r = {};
             var _stat_data = _render[_file_name]["stat"];
-            _r["stat_table"] = TemplateUtils.render_stat_table(_file_name, _stat_data);
+            _r["stat_table"] = TemplateStatTable.render_stat_table(_file_name, _stat_data);
             
             // render_hotspot: function (_file_name, _direction, _hotspot_json) {
             
             var _max_data = _render[_file_name]["hotspot"]["max"];
-            _r["hotspot_max_table"] = TemplateUtils.render_hotspot_table(_file_name, "Maximize", _max_data);
+            _r["hotspot_max_table"] = TemplateHotspotTable.render_hotspot_table(_file_name, "Maximize", _max_data);
             
             var _min_data = _render[_file_name]["hotspot"]["min"];
-            _r["hotspot_min_table"] = TemplateUtils.render_hotspot_table(_file_name, "Minimize", _min_data);
+            _r["hotspot_min_table"] = TemplateHotspotTable.render_hotspot_table(_file_name, "Minimize", _min_data);
             
             _render[_file_name] = _r;
         }
