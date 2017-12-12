@@ -50,9 +50,8 @@ TemplateHotspotTable = {
                 var _test = _lhs_item["test"];
                 if (typeof(_test["f-score"]) !== "undefined") {
                     // numeric
-                    _html = '<span title="f-score">'
+                    _html = TemplateUtils.json_decimal_rounding(_test["f-score"])
                         + '<sup>a</sup>'
-                        + TemplateUtils.json_decimal_rounding(_test["f-score"])
                         + TemplateUtils.get_sig_sign(_test["sig-level"]);
                 }
                 else {

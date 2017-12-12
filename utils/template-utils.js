@@ -111,23 +111,23 @@ TemplateUtils = {
         }
         
         if (JSONUtils.has_key_value(_data, "mode", "chi-sqr")) {
-            _notes.push("<sup>c</sup>: Pearson's chi-squared test");
+            _notes.push("<sup>c</sup>: Pearson's chi-squared test.");
         }
         if (JSONUtils.has_key_value(_data, "mode", "yates-corr")) {
-            _notes.push("<sup>y</sup>: Yates's chi-squared test");
+            _notes.push("<sup>y</sup>: Yates's chi-squared test.");
         }
         if (JSONUtils.has_key_value(_data, "mode", "fisher-exact")) {
-            _notes.push("<sup>f</sup>: Fisher's Exact Test");
+            _notes.push("<sup>f</sup>: Fisher's Exact Test's p-value.");
         }
         if (JSONUtils.has_key_value(_data, "adj-residual-is-sig", true)) {
-            _notes.push("<sup>r</sup>: Adjusted residual of the cell");
+            _notes.push("<sup>r</sup>: Adjusted residual in crosstabs cell.");
         }
         
         if (JSONUtils.has_key(_data, "f-score")) {
-            _notes.push("<sup>a</sup>: ANOVA's f-score");
+            _notes.push("<sup>a</sup>: ANOVA's f-score.");
         }
         if (JSONUtils.has_key(_data, "tukeyhsd-p-value")) {
-            _notes.push("<sup>t</sup>: TukeyHSD post-hot test's p-value");
+            _notes.push("<sup>t</sup>: TukeyHSD post-hot test's p-value.");
         }
         
         return _notes;

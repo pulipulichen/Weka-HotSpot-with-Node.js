@@ -210,6 +210,926 @@
       },
       "life": 1513182549859,
       "tags": []
+    },
+    {
+      "key": "example_input-weather.numeric_hotspot",
+      "val": {
+        "example_input-weather.numeric": {
+          "max": [
+            {
+              "rhs": {
+                "attribute": "play",
+                "value": "no",
+                "match_instances": 5,
+                "population": 14
+              },
+              "lhs": [
+                {
+                  "length": 0,
+                  "attribute": "temperature",
+                  "operator": "<=",
+                  "value": 64,
+                  "cover": 100,
+                  "match_instances": 1,
+                  "population": 1,
+                  "conf": 1,
+                  "lift": 2.8,
+                  "lev": 0.05,
+                  "conv": 0.64,
+                  "test": {
+                    "f-score": 1.4289257871823466,
+                    "p-value": 0.2532909487243029,
+                    "sig-level": 0
+                  },
+                  "comparison": []
+                },
+                {
+                  "length": 0,
+                  "attribute": "outlook",
+                  "operator": "=",
+                  "value": "sunny",
+                  "cover": 83.33,
+                  "match_instances": 5,
+                  "population": 6,
+                  "conf": 0.83,
+                  "lift": 2.33,
+                  "lev": 0.2,
+                  "conv": 1.93,
+                  "test": {
+                    "chisquare": 10.37037037037037,
+                    "p-value": 0.0055988996860243095,
+                    "sig-level": 2,
+                    "mode": "chi-sqr"
+                  },
+                  "comparison": {
+                    "exp": 2.142857142857143,
+                    "std-residual": 1.9518001458970664,
+                    "yates-residual": 2.5928571428571434,
+                    "adj-residual": 3.220305943597653,
+                    "sig-level": 2,
+                    "adj-residual-is-sig": true
+                  }
+                },
+                {
+                  "length": 0,
+                  "attribute": "humidity",
+                  "operator": ">",
+                  "value": 86,
+                  "cover": 75,
+                  "match_instances": 3,
+                  "population": 4,
+                  "conf": 0.75,
+                  "lift": 2.1,
+                  "lev": 0.11,
+                  "conv": 1.29,
+                  "test": {
+                    "f-score": 6.122849128083519,
+                    "p-value": 0.02790061539734201,
+                    "sig-level": 1
+                  },
+                  "comparison": [
+                    {
+                      "comparison": "no > yes",
+                      "tukeyhsd-p-value": 0.029254639454435627,
+                      "sig-level": 1
+                    }
+                  ]
+                },
+                {
+                  "length": 0,
+                  "attribute": "windy",
+                  "operator": "=",
+                  "value": "TRUE",
+                  "cover": 50,
+                  "match_instances": 3,
+                  "population": 6,
+                  "conf": 0.5,
+                  "lift": 1.4,
+                  "lev": 0.06,
+                  "conv": 0.96,
+                  "test": {
+                    "chisquare": 0.5804195804195805,
+                    "p-value": 0.5804195804195805,
+                    "sig-level": 0,
+                    "mode": "fisher-exact"
+                  },
+                  "comparison": {
+                    "exp": 2.142857142857143,
+                    "std-residual": 0.5855400437691199,
+                    "yates-residual": 0.059523809523809555,
+                    "adj-residual": 0.966091783079296,
+                    "sig-level": 0,
+                    "adj-residual-is-sig": false
+                  }
+                }
+              ]
+            },
+            {
+              "rhs": {
+                "attribute": "play",
+                "value": "yes",
+                "match_instances": 9,
+                "population": 14
+              },
+              "lhs": [
+                {
+                  "length": 0,
+                  "attribute": "outlook",
+                  "operator": "=",
+                  "value": "overcast",
+                  "cover": 100,
+                  "match_instances": 5,
+                  "population": 5,
+                  "conf": 1,
+                  "lift": 1.56,
+                  "lev": 0.13,
+                  "conv": 1.79,
+                  "test": {
+                    "chisquare": 10.37037037037037,
+                    "p-value": 0.0055988996860243095,
+                    "sig-level": 2,
+                    "mode": "chi-sqr"
+                  },
+                  "comparison": {
+                    "exp": 3.2142857142857144,
+                    "std-residual": 0.9960238411119946,
+                    "yates-residual": 0.5142857142857141,
+                    "adj-residual": 2.078698548207745,
+                    "sig-level": 1,
+                    "adj-residual-is-sig": true
+                  }
+                },
+                {
+                  "length": 0,
+                  "attribute": "humidity",
+                  "operator": "<=",
+                  "value": 60,
+                  "cover": 100,
+                  "match_instances": 5,
+                  "population": 5,
+                  "conf": 1,
+                  "lift": 1.56,
+                  "lev": 0.13,
+                  "conv": 1.79,
+                  "test": {
+                    "f-score": 6.122849128083519,
+                    "p-value": 0.02790061539734201,
+                    "sig-level": 1
+                  },
+                  "comparison": [
+                    {
+                      "comparison": "yes < no",
+                      "tukeyhsd-p-value": 0.029254639454435627,
+                      "sig-level": 1
+                    }
+                  ]
+                },
+                {
+                  "length": 0,
+                  "attribute": "outlook",
+                  "operator": "=",
+                  "value": "rainy",
+                  "cover": 100,
+                  "match_instances": 3,
+                  "population": 3,
+                  "conf": 1,
+                  "lift": 1.56,
+                  "lev": 0.08,
+                  "conv": 1.07,
+                  "test": {
+                    "chisquare": 10.37037037037037,
+                    "p-value": 0.0055988996860243095,
+                    "sig-level": 2,
+                    "mode": "chi-sqr"
+                  },
+                  "comparison": {
+                    "exp": 1.9285714285714286,
+                    "std-residual": 0.7715167498104596,
+                    "yates-residual": 0.1693121693121693,
+                    "adj-residual": 1.4564381625088383,
+                    "sig-level": 0,
+                    "adj-residual-is-sig": false
+                  }
+                },
+                {
+                  "length": 0,
+                  "attribute": "temperature",
+                  "operator": ">",
+                  "value": 83,
+                  "cover": 100,
+                  "match_instances": 1,
+                  "population": 1,
+                  "conf": 1,
+                  "lift": 1.56,
+                  "lev": 0.03,
+                  "conv": 0.36,
+                  "test": {
+                    "f-score": 1.4289257871823466,
+                    "p-value": 0.2532909487243029,
+                    "sig-level": 0
+                  },
+                  "comparison": []
+                },
+                {
+                  "length": 0,
+                  "attribute": "windy",
+                  "operator": "=",
+                  "value": "FALSE",
+                  "cover": 75,
+                  "match_instances": 6,
+                  "population": 8,
+                  "conf": 0.75,
+                  "lift": 1.17,
+                  "lev": 0.06,
+                  "conv": 0.95,
+                  "test": {
+                    "chisquare": 0.5804195804195805,
+                    "p-value": 0.5804195804195805,
+                    "sig-level": 0,
+                    "mode": "fisher-exact"
+                  },
+                  "comparison": {
+                    "exp": 5.142857142857143,
+                    "std-residual": 0.37796447300922703,
+                    "yates-residual": 0.024801587301587245,
+                    "adj-residual": 0.9660917830792956,
+                    "sig-level": 0,
+                    "adj-residual-is-sig": false
+                  }
+                }
+              ]
+            }
+          ],
+          "min": [
+            {
+              "rhs": {
+                "attribute": "play",
+                "value": "no",
+                "match_instances": 5,
+                "population": 14
+              },
+              "lhs": [
+                {
+                  "length": 0,
+                  "attribute": "windy",
+                  "operator": "=",
+                  "value": "FALSE",
+                  "cover": 25,
+                  "match_instances": 2,
+                  "population": 8,
+                  "conf": 0.25,
+                  "lift": 0.7,
+                  "lev": -0.06,
+                  "conv": 0.73,
+                  "test": {
+                    "chisquare": 0.5804195804195805,
+                    "p-value": 0.5804195804195805,
+                    "sig-level": 0,
+                    "mode": "fisher-exact"
+                  },
+                  "comparison": {
+                    "exp": 2.857142857142857,
+                    "std-residual": -0.50709255283711,
+                    "yates-residual": 0.044642857142857165,
+                    "adj-residual": -0.966091783079296,
+                    "sig-level": 0,
+                    "adj-residual-is-sig": false
+                  }
+                }
+              ]
+            },
+            {
+              "rhs": {
+                "attribute": "play",
+                "value": "yes",
+                "match_instances": 9,
+                "population": 14
+              },
+              "lhs": [
+                {
+                  "length": 0,
+                  "attribute": "outlook",
+                  "operator": "=",
+                  "value": "sunny",
+                  "cover": 16.67,
+                  "match_instances": 1,
+                  "population": 6,
+                  "conf": 0.17,
+                  "lift": 0.26,
+                  "lev": -0.2,
+                  "conv": 0.36,
+                  "test": {
+                    "chisquare": 10.37037037037037,
+                    "p-value": 0.0055988996860243095,
+                    "sig-level": 2,
+                    "mode": "chi-sqr"
+                  },
+                  "comparison": {
+                    "exp": 3.857142857142857,
+                    "std-residual": -1.454785934906616,
+                    "yates-residual": 1.4404761904761907,
+                    "adj-residual": -3.220305943597653,
+                    "sig-level": 2,
+                    "adj-residual-is-sig": true
+                  }
+                },
+                {
+                  "length": 0,
+                  "attribute": "windy",
+                  "operator": "=",
+                  "value": "TRUE",
+                  "cover": 50,
+                  "match_instances": 3,
+                  "population": 6,
+                  "conf": 0.5,
+                  "lift": 0.78,
+                  "lev": -0.06,
+                  "conv": 0.54,
+                  "test": {
+                    "chisquare": 0.5804195804195805,
+                    "p-value": 0.5804195804195805,
+                    "sig-level": 0,
+                    "mode": "fisher-exact"
+                  },
+                  "comparison": {
+                    "exp": 3.857142857142857,
+                    "std-residual": -0.4364357804719848,
+                    "yates-residual": 0.03306878306878308,
+                    "adj-residual": -0.966091783079296,
+                    "sig-level": 0,
+                    "adj-residual-is-sig": false
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "life": 1513182681841,
+      "tags": []
+    },
+    {
+      "key": "example_input-weather.numeric_view",
+      "val": {
+        "example_input-weather.numeric": {
+          "stat": {
+            "target_attribute_options": [
+              "no",
+              "yes"
+            ],
+            "attributes_type": {
+              "outlook": "nominal",
+              "temperature": "numeric",
+              "humidity": "numeric",
+              "windy": "nominal"
+            },
+            "attributes": {
+              "outlook": {
+                "chi-square": {
+                  "chisquare": 10.37037037037037,
+                  "p-value": 0.0055988996860243095,
+                  "sig-level": 2,
+                  "mode": "chi-sqr"
+                },
+                "group-sig": {
+                  "no": [
+                    {
+                      "option": "sunny",
+                      "adj-residual": 3.220305943597653,
+                      "sig-level": 2
+                    },
+                    {
+                      "option": "overcast",
+                      "adj-residual": -2.0786985482077456,
+                      "sig-level": 1
+                    }
+                  ],
+                  "yes": [
+                    {
+                      "option": "sunny",
+                      "adj-residual": -3.220305943597653,
+                      "sig-level": 2
+                    },
+                    {
+                      "option": "overcast",
+                      "adj-residual": 2.078698548207745,
+                      "sig-level": 1
+                    }
+                  ]
+                },
+                "cell": {
+                  "no": {
+                    "sunny": {
+                      "exp": 2.142857142857143,
+                      "std-residual": 1.9518001458970664,
+                      "yates-residual": 2.5928571428571434,
+                      "adj-residual": 3.220305943597653,
+                      "sig-level": 2,
+                      "adj-residual-is-sig": true
+                    },
+                    "overcast": {
+                      "exp": 1.7857142857142858,
+                      "std-residual": -1.336306209562122,
+                      "yates-residual": 0.9257142857142858,
+                      "adj-residual": -2.0786985482077456,
+                      "sig-level": 1,
+                      "adj-residual-is-sig": true
+                    },
+                    "rainy": {
+                      "exp": 1.0714285714285714,
+                      "std-residual": -1.0350983390135313,
+                      "yates-residual": 0.30476190476190473,
+                      "adj-residual": -1.4564381625088383,
+                      "sig-level": 0,
+                      "adj-residual-is-sig": false
+                    }
+                  },
+                  "yes": {
+                    "sunny": {
+                      "exp": 3.857142857142857,
+                      "std-residual": -1.454785934906616,
+                      "yates-residual": 1.4404761904761907,
+                      "adj-residual": -3.220305943597653,
+                      "sig-level": 2,
+                      "adj-residual-is-sig": true
+                    },
+                    "overcast": {
+                      "exp": 3.2142857142857144,
+                      "std-residual": 0.9960238411119946,
+                      "yates-residual": 0.5142857142857141,
+                      "adj-residual": 2.078698548207745,
+                      "sig-level": 1,
+                      "adj-residual-is-sig": true
+                    },
+                    "rainy": {
+                      "exp": 1.9285714285714286,
+                      "std-residual": 0.7715167498104596,
+                      "yates-residual": 0.1693121693121693,
+                      "adj-residual": 1.4564381625088383,
+                      "sig-level": 0,
+                      "adj-residual-is-sig": false
+                    }
+                  }
+                },
+                "tau-y2x": 0.7407407407407407
+              },
+              "temperature": {
+                "anova": {
+                  "f-score": 1.4289257871823466,
+                  "p-value": 0.2532909487243029,
+                  "sig-level": 0
+                },
+                "avg": {
+                  "no": 70.8,
+                  "yes": 75.11111111111111
+                },
+                "stddev": {
+                  "no": 6.43117407632541,
+                  "yes": 5.724109721062781
+                },
+                "tukeyhsd": {
+                  "no": [],
+                  "yes": []
+                }
+              },
+              "humidity": {
+                "anova": {
+                  "f-score": 6.122849128083519,
+                  "p-value": 0.02790061539734201,
+                  "sig-level": 1
+                },
+                "avg": {
+                  "no": 86.2,
+                  "yes": 64.11111111111111
+                },
+                "stddev": {
+                  "no": 8.704022058795578,
+                  "yes": 17.30410641337576
+                },
+                "tukeyhsd": {
+                  "no": [
+                    {
+                      "comparison": "no > yes",
+                      "tukeyhsd-p-value": 0.029254639454435627,
+                      "sig-level": 1
+                    }
+                  ],
+                  "yes": [
+                    {
+                      "comparison": "yes < no",
+                      "tukeyhsd-p-value": 0.029254639454435627,
+                      "sig-level": 1
+                    }
+                  ]
+                }
+              },
+              "windy": {
+                "chi-square": {
+                  "chisquare": 0.5804195804195805,
+                  "p-value": 0.5804195804195805,
+                  "sig-level": 0,
+                  "mode": "fisher-exact"
+                },
+                "group-sig": {
+                  "no": [],
+                  "yes": []
+                },
+                "cell": {
+                  "no": {
+                    "FALSE": {
+                      "exp": 2.857142857142857,
+                      "std-residual": -0.50709255283711,
+                      "yates-residual": 0.044642857142857165,
+                      "adj-residual": -0.966091783079296,
+                      "sig-level": 0,
+                      "adj-residual-is-sig": false
+                    },
+                    "TRUE": {
+                      "exp": 2.142857142857143,
+                      "std-residual": 0.5855400437691199,
+                      "yates-residual": 0.059523809523809555,
+                      "adj-residual": 0.966091783079296,
+                      "sig-level": 0,
+                      "adj-residual-is-sig": false
+                    }
+                  },
+                  "yes": {
+                    "FALSE": {
+                      "exp": 5.142857142857143,
+                      "std-residual": 0.37796447300922703,
+                      "yates-residual": 0.024801587301587245,
+                      "adj-residual": 0.9660917830792956,
+                      "sig-level": 0,
+                      "adj-residual-is-sig": false
+                    },
+                    "TRUE": {
+                      "exp": 3.857142857142857,
+                      "std-residual": -0.4364357804719848,
+                      "yates-residual": 0.03306878306878308,
+                      "adj-residual": -0.966091783079296,
+                      "sig-level": 0,
+                      "adj-residual-is-sig": false
+                    }
+                  }
+                },
+                "tau-y2x": 0.06666666666666665
+              }
+            }
+          },
+          "hotspot": {
+            "max": [
+              {
+                "rhs": {
+                  "attribute": "play",
+                  "value": "no",
+                  "match_instances": 5,
+                  "population": 14
+                },
+                "lhs": [
+                  {
+                    "length": 0,
+                    "attribute": "temperature",
+                    "operator": "<=",
+                    "value": 64,
+                    "cover": 100,
+                    "match_instances": 1,
+                    "population": 1,
+                    "conf": 1,
+                    "lift": 2.8,
+                    "lev": 0.05,
+                    "conv": 0.64,
+                    "test": {
+                      "f-score": 1.4289257871823466,
+                      "p-value": 0.2532909487243029,
+                      "sig-level": 0
+                    },
+                    "comparison": []
+                  },
+                  {
+                    "length": 0,
+                    "attribute": "outlook",
+                    "operator": "=",
+                    "value": "sunny",
+                    "cover": 83.33,
+                    "match_instances": 5,
+                    "population": 6,
+                    "conf": 0.83,
+                    "lift": 2.33,
+                    "lev": 0.2,
+                    "conv": 1.93,
+                    "test": {
+                      "chisquare": 10.37037037037037,
+                      "p-value": 0.0055988996860243095,
+                      "sig-level": 2,
+                      "mode": "chi-sqr"
+                    },
+                    "comparison": {
+                      "exp": 2.142857142857143,
+                      "std-residual": 1.9518001458970664,
+                      "yates-residual": 2.5928571428571434,
+                      "adj-residual": 3.220305943597653,
+                      "sig-level": 2,
+                      "adj-residual-is-sig": true
+                    }
+                  },
+                  {
+                    "length": 0,
+                    "attribute": "humidity",
+                    "operator": ">",
+                    "value": 86,
+                    "cover": 75,
+                    "match_instances": 3,
+                    "population": 4,
+                    "conf": 0.75,
+                    "lift": 2.1,
+                    "lev": 0.11,
+                    "conv": 1.29,
+                    "test": {
+                      "f-score": 6.122849128083519,
+                      "p-value": 0.02790061539734201,
+                      "sig-level": 1
+                    },
+                    "comparison": [
+                      {
+                        "comparison": "no > yes",
+                        "tukeyhsd-p-value": 0.029254639454435627,
+                        "sig-level": 1
+                      }
+                    ]
+                  },
+                  {
+                    "length": 0,
+                    "attribute": "windy",
+                    "operator": "=",
+                    "value": "TRUE",
+                    "cover": 50,
+                    "match_instances": 3,
+                    "population": 6,
+                    "conf": 0.5,
+                    "lift": 1.4,
+                    "lev": 0.06,
+                    "conv": 0.96,
+                    "test": {
+                      "chisquare": 0.5804195804195805,
+                      "p-value": 0.5804195804195805,
+                      "sig-level": 0,
+                      "mode": "fisher-exact"
+                    },
+                    "comparison": {
+                      "exp": 2.142857142857143,
+                      "std-residual": 0.5855400437691199,
+                      "yates-residual": 0.059523809523809555,
+                      "adj-residual": 0.966091783079296,
+                      "sig-level": 0,
+                      "adj-residual-is-sig": false
+                    }
+                  }
+                ]
+              },
+              {
+                "rhs": {
+                  "attribute": "play",
+                  "value": "yes",
+                  "match_instances": 9,
+                  "population": 14
+                },
+                "lhs": [
+                  {
+                    "length": 0,
+                    "attribute": "outlook",
+                    "operator": "=",
+                    "value": "overcast",
+                    "cover": 100,
+                    "match_instances": 5,
+                    "population": 5,
+                    "conf": 1,
+                    "lift": 1.56,
+                    "lev": 0.13,
+                    "conv": 1.79,
+                    "test": {
+                      "chisquare": 10.37037037037037,
+                      "p-value": 0.0055988996860243095,
+                      "sig-level": 2,
+                      "mode": "chi-sqr"
+                    },
+                    "comparison": {
+                      "exp": 3.2142857142857144,
+                      "std-residual": 0.9960238411119946,
+                      "yates-residual": 0.5142857142857141,
+                      "adj-residual": 2.078698548207745,
+                      "sig-level": 1,
+                      "adj-residual-is-sig": true
+                    }
+                  },
+                  {
+                    "length": 0,
+                    "attribute": "humidity",
+                    "operator": "<=",
+                    "value": 60,
+                    "cover": 100,
+                    "match_instances": 5,
+                    "population": 5,
+                    "conf": 1,
+                    "lift": 1.56,
+                    "lev": 0.13,
+                    "conv": 1.79,
+                    "test": {
+                      "f-score": 6.122849128083519,
+                      "p-value": 0.02790061539734201,
+                      "sig-level": 1
+                    },
+                    "comparison": [
+                      {
+                        "comparison": "yes < no",
+                        "tukeyhsd-p-value": 0.029254639454435627,
+                        "sig-level": 1
+                      }
+                    ]
+                  },
+                  {
+                    "length": 0,
+                    "attribute": "outlook",
+                    "operator": "=",
+                    "value": "rainy",
+                    "cover": 100,
+                    "match_instances": 3,
+                    "population": 3,
+                    "conf": 1,
+                    "lift": 1.56,
+                    "lev": 0.08,
+                    "conv": 1.07,
+                    "test": {
+                      "chisquare": 10.37037037037037,
+                      "p-value": 0.0055988996860243095,
+                      "sig-level": 2,
+                      "mode": "chi-sqr"
+                    },
+                    "comparison": {
+                      "exp": 1.9285714285714286,
+                      "std-residual": 0.7715167498104596,
+                      "yates-residual": 0.1693121693121693,
+                      "adj-residual": 1.4564381625088383,
+                      "sig-level": 0,
+                      "adj-residual-is-sig": false
+                    }
+                  },
+                  {
+                    "length": 0,
+                    "attribute": "temperature",
+                    "operator": ">",
+                    "value": 83,
+                    "cover": 100,
+                    "match_instances": 1,
+                    "population": 1,
+                    "conf": 1,
+                    "lift": 1.56,
+                    "lev": 0.03,
+                    "conv": 0.36,
+                    "test": {
+                      "f-score": 1.4289257871823466,
+                      "p-value": 0.2532909487243029,
+                      "sig-level": 0
+                    },
+                    "comparison": []
+                  },
+                  {
+                    "length": 0,
+                    "attribute": "windy",
+                    "operator": "=",
+                    "value": "FALSE",
+                    "cover": 75,
+                    "match_instances": 6,
+                    "population": 8,
+                    "conf": 0.75,
+                    "lift": 1.17,
+                    "lev": 0.06,
+                    "conv": 0.95,
+                    "test": {
+                      "chisquare": 0.5804195804195805,
+                      "p-value": 0.5804195804195805,
+                      "sig-level": 0,
+                      "mode": "fisher-exact"
+                    },
+                    "comparison": {
+                      "exp": 5.142857142857143,
+                      "std-residual": 0.37796447300922703,
+                      "yates-residual": 0.024801587301587245,
+                      "adj-residual": 0.9660917830792956,
+                      "sig-level": 0,
+                      "adj-residual-is-sig": false
+                    }
+                  }
+                ]
+              }
+            ],
+            "min": [
+              {
+                "rhs": {
+                  "attribute": "play",
+                  "value": "no",
+                  "match_instances": 5,
+                  "population": 14
+                },
+                "lhs": [
+                  {
+                    "length": 0,
+                    "attribute": "windy",
+                    "operator": "=",
+                    "value": "FALSE",
+                    "cover": 25,
+                    "match_instances": 2,
+                    "population": 8,
+                    "conf": 0.25,
+                    "lift": 0.7,
+                    "lev": -0.06,
+                    "conv": 0.73,
+                    "test": {
+                      "chisquare": 0.5804195804195805,
+                      "p-value": 0.5804195804195805,
+                      "sig-level": 0,
+                      "mode": "fisher-exact"
+                    },
+                    "comparison": {
+                      "exp": 2.857142857142857,
+                      "std-residual": -0.50709255283711,
+                      "yates-residual": 0.044642857142857165,
+                      "adj-residual": -0.966091783079296,
+                      "sig-level": 0,
+                      "adj-residual-is-sig": false
+                    }
+                  }
+                ]
+              },
+              {
+                "rhs": {
+                  "attribute": "play",
+                  "value": "yes",
+                  "match_instances": 9,
+                  "population": 14
+                },
+                "lhs": [
+                  {
+                    "length": 0,
+                    "attribute": "outlook",
+                    "operator": "=",
+                    "value": "sunny",
+                    "cover": 16.67,
+                    "match_instances": 1,
+                    "population": 6,
+                    "conf": 0.17,
+                    "lift": 0.26,
+                    "lev": -0.2,
+                    "conv": 0.36,
+                    "test": {
+                      "chisquare": 10.37037037037037,
+                      "p-value": 0.0055988996860243095,
+                      "sig-level": 2,
+                      "mode": "chi-sqr"
+                    },
+                    "comparison": {
+                      "exp": 3.857142857142857,
+                      "std-residual": -1.454785934906616,
+                      "yates-residual": 1.4404761904761907,
+                      "adj-residual": -3.220305943597653,
+                      "sig-level": 2,
+                      "adj-residual-is-sig": true
+                    }
+                  },
+                  {
+                    "length": 0,
+                    "attribute": "windy",
+                    "operator": "=",
+                    "value": "TRUE",
+                    "cover": 50,
+                    "match_instances": 3,
+                    "population": 6,
+                    "conf": 0.5,
+                    "lift": 0.78,
+                    "lev": -0.06,
+                    "conv": 0.54,
+                    "test": {
+                      "chisquare": 0.5804195804195805,
+                      "p-value": 0.5804195804195805,
+                      "sig-level": 0,
+                      "mode": "fisher-exact"
+                    },
+                    "comparison": {
+                      "exp": 3.857142857142857,
+                      "std-residual": -0.4364357804719848,
+                      "yates-residual": 0.03306878306878308,
+                      "adj-residual": -0.966091783079296,
+                      "sig-level": 0,
+                      "adj-residual-is-sig": false
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "life": 1513182681864,
+      "tags": []
     }
   ]
 }
