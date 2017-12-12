@@ -174,7 +174,7 @@ var Main = {
         for (var _file_name in _render) {
             var _r = {};
             var _stat_data = _render[_file_name]["stat"];
-            _r["stat_table"] = TemplateUtils.render_stat_table(_stat_data);
+            _r["stat_table"] = TemplateUtils.render_stat_table(_file_name, _stat_data);
             var _max_data = _render[_file_name]["hotspot"]["max"];
             var _min_data = _render[_file_name]["hotspot"]["min"];
             _render[_file_name] = _r;

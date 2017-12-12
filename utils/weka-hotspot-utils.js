@@ -56,7 +56,8 @@ WekaHotSpotUtils = {
                         //console.log(_shell_result);
                         if (_shell_result.stderr !== "" && _shell_result.stderr.indexOf("large") > -1) {
                             _index_too_large = true;
-                            console.log("too large: " + _shell_result.stderr);
+                            //console.log("too large: " + _shell_result.stderr);
+                            console.log("too large");
                             break;
                         }
                         var _result = _shell_result.stdout;
