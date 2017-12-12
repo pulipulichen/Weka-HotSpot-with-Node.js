@@ -120,9 +120,15 @@ TemplateUtils = {
             tbody_html: _tbody
         });
     },
+    
+    // --------------------
+    
     render_stat_tr_numeric: function (_attr, _attr_data, _target_attribute_options_count) {
         return "<tr><td>numeric</td></tr>";
     },
+    
+    // --------------------
+    
     render_stat_tr_nominal: function (_attr, _attr_data, _target_attribute_options_count) {
         
         return this.render("stat-table/tbody-tr-nominal", {

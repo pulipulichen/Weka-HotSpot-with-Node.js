@@ -33,7 +33,7 @@ var Main = {
         //TmpUtils.append(_full_report);
         
         this.render();
-        TmpUtils.append(this.data.render);
+        TmpUtils.append(this.data.render["example_input-weather.numeric"].stat_table);
         
         console.log("======================");
         console.log("Finish!");

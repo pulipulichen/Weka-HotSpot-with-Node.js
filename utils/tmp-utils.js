@@ -1,5 +1,5 @@
 TmpUtils = {
-    path: "./tmp.txt",
+    path: "./tmp.html",
     append: function (_data) {
         if (typeof(_data) === "object") {
             _data = JSON.stringify(_data, null, 4);
