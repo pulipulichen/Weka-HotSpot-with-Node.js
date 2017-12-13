@@ -4,6 +4,7 @@
       "key": "example_input-weather.numeric_stat",
       "val": {
         "example_input-weather.numeric": {
+          "target_attribute": "play",
           "target_attribute_options": [
             "no",
             "yes"
@@ -208,7 +209,7 @@
           }
         }
       },
-      "life": 1513182549859,
+      "life": 1513235883368,
       "tags": []
     },
     {
@@ -565,7 +566,7 @@
           ]
         }
       },
-      "life": 1513182681841,
+      "life": 1513236035056,
       "tags": []
     },
     {
@@ -573,6 +574,7 @@
       "val": {
         "example_input-weather.numeric": {
           "stat": {
+            "target_attribute": "play",
             "target_attribute_options": [
               "no",
               "yes"
@@ -1128,7 +1130,7 @@
           }
         }
       },
-      "life": 1513182681864,
+      "life": 1513236036512,
       "tags": []
     }
   ]

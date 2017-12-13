@@ -47,10 +47,7 @@ CSVUtils = {
         
         return _target_value_data;
     },
-    group_by_target_attribute: function (_json) {
-        
-        // _target_attribute
-        
+    get_target_attribute: function (_json) {
         var _cfg_target_attribute = cfg.hotspot.targetIndex;
         
         var _target_attribute;
@@ -62,6 +59,12 @@ CSVUtils = {
         else {
             _target_attribute = _cfg_target_attribute;
         }
+        return _target_attribute;
+    },
+    group_by_target_attribute: function (_json) {
+        
+        // _target_attribute
+        var _target_attribute = this.get_target_attribute(_json);
         
         // ----------------
         // values

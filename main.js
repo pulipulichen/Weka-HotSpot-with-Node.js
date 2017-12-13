@@ -63,6 +63,7 @@ var Main = {
             var _file_path = this.data.input_files[_i];
             var _file_name = path.basename(_file_path, '.csv');
             var _csv1 = CSVUtils.read(_file_path);
+            var _target_attr = CSVUtils.get_target_attribute(_csv1);
             var _group_json = CSVUtils.group_by_target_attribute(_csv1);
             
             //Wconsole.log(_group_json);
@@ -84,6 +85,7 @@ var Main = {
             var _group_json = CSVUtils.stat.analyse(_group_json, _types_json);
             
             _stat_data[_file_name] = {
+                target_attribute: _target_attr,
                 target_attribute_options: _target_attribute_options,
                 attributes_type: _types_json,
                 attributes: _group_json

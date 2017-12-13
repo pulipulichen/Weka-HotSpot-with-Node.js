@@ -54,8 +54,8 @@ tr.highlight td {
 }
 
 .text-indent-1 {
-    text-indent: -1em;
-    padding-left: 1em;
+    text-indent: -0.5rem;
+    padding-left: 1rem;
 }
 
 hr {
