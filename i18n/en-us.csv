@@ -1,3 +1,27 @@
 key,translation
-welcome $[1],Welcome $[1]
-pudding,Pudding
+Full Report,Full Report
+Statistic Result,Statistic Result
+Attr.,Attr.
+Sig. Adj. R.,Sig. Adj. R.
+Avg.,Avg.
+Stddev.,Stddev.
+TukeyHSD,TukeyHSD
+HotSpot Result,HotSpot Result
+Target Maximize,Target Maximize
+Target Minimize,Target Minimize
+RHS,RHS
+LHS,LHS
+Cover,Cover
+Conf.,Conf.
+Lift.,Lift.
+Lev.,Lev.
+Conv.,Conv.
+Test,Test
+Comp.,Comp.
+p-value,p-value
+Pearson's chi-squared test.,Pearson's chi-squared test.
+Yates's chi-squared test.,Yates's chi-squared test.
+Fisher's Exact Test's p-value.,Fisher's Exact Test's p-value.
+Adjusted residual in crosstabs cell.,Adjusted residual in crosstabs cell.
+ANOVA's f-score.,ANOVA's f-score.
+TukeyHSD post-hot test's p-value.,TukeyHSD post-hot test's p-value.

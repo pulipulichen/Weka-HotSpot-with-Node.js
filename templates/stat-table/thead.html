@@ -1,8 +1,14 @@
 <thead>
     <tr>
-        <th colspan="2" align="left"> Attr. </th>
+        <th colspan="2" align="left">
+            {{ #i18n }}Attr.{{ /i18n }}
+        </th>
         {{ #target_attribute_options }}
-            <th align="left">{{.}}</th>
+            <th align="left">
+                [???]
+                =
+                {{.}}
+            </th>
         {{ /target_attribute_options }}
     </tr>
 </thead>

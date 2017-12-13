@@ -91,7 +91,21 @@ TemplateUtils = {
     render: function (_template_name, _data) {
         var _template_path = "./templates/" + _template_name + ".html";
         var _template = fs.readFileSync(_template_path,'utf8');
-        return Mustache.render(_template, _data);
+        
+        _data["i18n"] = function () {
+            return function(_text, _render) {
+                return i18n.__(_render(_text.trim()));
+            };
+        };
+        
+        try {
+            return Mustache.render(_template, _data);
+        }
+        catch (_e) {
+            throw "Render error: " + _e
+                + "\nTempalte name: " + _template_name 
+                + "\nData: " + JSON.stringify(_data);
+        }
     },
     
     // ----------------------------
@@ -101,33 +115,33 @@ TemplateUtils = {
         
         var _alpha_levels = cfg.stat.alpha.split(",");
         if (JSONUtils.has_key_value(_data, "sig-level", 1)) {
-            _notes.push("* : p-value < " + _alpha_levels[0]);
+            _notes.push("* : " + i18n.__("p-value") + " < " + _alpha_levels[0]);
         }
         if (JSONUtils.has_key_value(_data, "sig-level", 2)) {
-            _notes.push("** : p-value < " + _alpha_levels[1]);
+            _notes.push("** : " + i18n.__("p-value") + " < " + _alpha_levels[1]);
         }
         if (JSONUtils.has_key_value(_data, "sig-level", 3)) {
-            _notes.push("** : p-value < " + _alpha_levels[2]);
+            _notes.push("** : " + i18n.__("p-value") + " < " + _alpha_levels[2]);
         }
         
         if (JSONUtils.has_key_value(_data, "mode", "chi-sqr")) {
-            _notes.push("<sup>c</sup>: Pearson's chi-squared test.");
+            _notes.push("<sup>c</sup>: " + i18n.__("Pearson's chi-squared test.") );
         }
         if (JSONUtils.has_key_value(_data, "mode", "yates-corr")) {
-            _notes.push("<sup>y</sup>: Yates's chi-squared test.");
+            _notes.push("<sup>y</sup>: " + i18n.__("Yates's chi-squared test.") );
         }
         if (JSONUtils.has_key_value(_data, "mode", "fisher-exact")) {
-            _notes.push("<sup>f</sup>: Fisher's Exact Test's p-value.");
+            _notes.push("<sup>f</sup>: " + i18n.__("Fisher's Exact Test's p-value.") );
         }
         if (JSONUtils.has_key_value(_data, "adj-residual-is-sig", true)) {
-            _notes.push("<sup>r</sup>: Adjusted residual in crosstabs cell.");
+            _notes.push("<sup>r</sup>: " + i18n.__("Adjusted residual in crosstabs cell.") );
         }
         
         if (JSONUtils.has_key(_data, "f-score")) {
-            _notes.push("<sup>a</sup>: ANOVA's f-score.");
+            _notes.push("<sup>a</sup>: " + i18n.__("ANOVA's f-score.") );
         }
         if (JSONUtils.has_key(_data, "tukeyhsd-p-value")) {
-            _notes.push("<sup>t</sup>: TukeyHSD post-hot test's p-value.");
+            _notes.push("<sup>t</sup>: " + i18n.__("TukeyHSD post-hot test's p-value.") );
         }
         
         return _notes;

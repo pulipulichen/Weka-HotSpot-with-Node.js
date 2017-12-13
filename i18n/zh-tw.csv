@@ -1,3 +1,27 @@
 key,translation
-welcom $[1],歡迎 $[1]
-pudding,布丁
+Full Report,完整報告
+Statistic Result,統計結果
+Attr.,原因屬性
+Sig. Adj. R.,顯著的調整後殘差
+Avg.,平均值
+Stddev.,標準差
+TukeyHSD,TukeyHSD<br />事後比較
+HotSpot Result,HotSpot結果
+Target Maximize,目標屬性最大化
+Target Minimize,目標屬性最小化
+RHS,結果規則
+LHS,原因規則
+Cover,涵蓋率
+Conf.,信賴度
+Lift.,增益度
+Lev.,影響度
+Conv.,確信度
+Test,統計檢定
+Comp.,比較
+p-value,p值
+Pearson's chi-squared test.,皮爾森的卡方檢定值
+Yates's chi-squared test.,葉氏校正後的卡方檢定值
+Fisher's Exact Test's p-value.,飛雪爾精確檢定的p值
+Adjusted residual in crosstabs cell.,列聯表的調整後殘差值
+ANOVA's f-score.,ANOVA的f值
+TukeyHSD post-hot test's p-value.,TukeyHSD事後比較的p值

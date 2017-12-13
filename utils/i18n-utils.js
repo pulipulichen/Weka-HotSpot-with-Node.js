@@ -5,7 +5,14 @@ i18n = {
         var _csv_path = './i18n/' + _locale + ".csv";
         
         var _csv_file = fs.readFileSync(_csv_path, 'utf8');
-        var _csv_object = csv_parse(_csv_file, {columns: true});
+        
+        try {
+            var _csv_object = csv_parse(_csv_file, {columns: true});
+        }
+        catch (_e) {
+            throw  _csv_path + " format error: " + _e;
+        }
+        
         var _locale_data = {};
         for (var _i = 0; _i < _csv_object.length; _i++) {
             var _key = _csv_object[_i]["key"];

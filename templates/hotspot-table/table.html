@@ -3,19 +3,19 @@
        cellpadding="5"
        data-file-name="{{ file_name }}">
     <caption>
-        {{ file_name}} HotSpot Result ({{ direction }})
+        {{ file_name}} {{ #i18n }}HotSpot Result{{ /i18n }} ({{ #i18n }}Target {{ direction }}{{ /i18n }})
     </caption>
     <thead>
         <tr>
-            <th align="left">RHS ({{ target_attr }})</th>
-            <th align="left">LHS</th>
-            <th align="right">Cover</th>
-            <th align="left" title="Confidence">Conf.</th>
-            <th align="right">Lift.</th>
-            <th align="right" title="Leverage">Lev.</th>
-            <th align="right" title="Conviction">Conv.</th>
-            <th align="left">Test</th>
-            <th align="left" title="comparation">Comp.</th>
+            <th align="left">{{ #i18n }}RHS{{ /i18n}} ({{ target_attr }})</th>
+            <th align="left">{{ #i18n }}LHS{{ /i18n}}</th>
+            <th align="right">{{ #i18n }}Cover{{ /i18n}}</th>
+            <th align="left" title="Confidence">{{ #i18n }}Conf.{{ /i18n}}</th>
+            <th align="right">{{ #i18n }}Lift.{{ /i18n}}</th>
+            <th align="right" title="Leverage">{{ #i18n }}Lev.{{ /i18n}}</th>
+            <th align="right" title="Conviction">{{ #i18n }}Conv.{{ /i18n}}</th>
+            <th align="left">{{ #i18n }}Test{{ /i18n}}</th>
+            <th align="left" title="comparation">{{ #i18n }}Comp.{{ /i18n}}</th>
         </tr>
     </thead>
     <tbody>
