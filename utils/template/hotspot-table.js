@@ -55,9 +55,14 @@ TemplateHotspotTable = {
                 var _test = _lhs_item["test"];
                 if (typeof(_test["f-score"]) !== "undefined") {
                     // numeric
-                    _html = TemplateUtils.json_decimal_rounding(_test["f-score"])
-                        + '<sup>a</sup>'
-                        + TemplateUtils.get_sig_sign(_test["sig-level"]);
+                    if (_test["f-score"] === null) {
+                        _html = "-";
+                    }
+                    else {
+                        _html = TemplateUtils.json_decimal_rounding(_test["f-score"])
+                            + '<sup>a</sup>'
+                            + TemplateUtils.get_sig_sign(_test["sig-level"]);
+                    }
                 }
                 else {
                     // nominal

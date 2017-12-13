@@ -19,7 +19,7 @@ substr_wrap = function (_str, _left_needle, _right_needle) {
 };
 
 parseNumber = function (_str) {
-    if (isNaN(_str) === false) {
+    if (isNaN(_str) === false && _str.trim() !== "") {
         var _tmp;
         eval("_tmp = " + _str);
         _str = _tmp;

@@ -17,11 +17,18 @@ AnovaUtils = {
         //console.log(_group_array);
         //var _f_score = jStat.anovafscore(_group_array);
         var _f_score = anova.test(_group_array);
-        var _df1 = _group_id.length - 1;
-        var _df2 = _n - _df1;
-        var _p_value = jStat.ftest(_f_score, _df1, _df2);
-
-        var _sig_level = this.sig_level(_p_value);
+        var _p_value = null;
+        var _sig_level = 0;
+        
+        if (isNaN(_f_score) === false) {
+            var _df1 = _group_id.length - 1;
+            var _df2 = _n - _df1;
+            _p_value = jStat.ftest(_f_score, _df1, _df2);
+            _sig_level = this.sig_level(_p_value);
+        }
+        else {
+            _f_score = null;
+        }
         //console.log([_f_score, _df1, _df2, _p_value]);
 
         var _anova_data = {
@@ -36,8 +43,16 @@ AnovaUtils = {
         var _stddev_data = {};
 
         for (var _group_name in _group_json) {
-            _avg_data[_group_name] = jStat.mean(_group_json[_group_name]);
-            _stddev_data[_group_name] = jStat.stdev(_group_json[_group_name]);
+            var _data_array = _group_json[_group_name];
+            
+            if (_data_array.length > 0) {
+                _avg_data[_group_name] = jStat.mean(_data_array);
+                _stddev_data[_group_name] = jStat.stdev(_data_array);
+            }
+            else {
+                _avg_data[_group_name] = null;
+                _stddev_data[_group_name] = null;
+            }
         }
 
         // -------------------------
@@ -64,7 +79,13 @@ AnovaUtils = {
             var _group2_id = _tukeyhsd_result[_c][0][1];
             var _group2_name = _group_id[_group2_id];
             var _group2_avg = _avg_data[_group2_name];
-
+            
+            if (_group1_avg === null 
+                    || _group2_avg === null ) {
+                continue;
+            }
+            
+            
             if (_group1_avg > _group2_avg) {
                 _tukeyhsd_compare[_group1_name].push({
                     "comparison": _group1_name + " > " + _group2_name,
@@ -77,7 +98,7 @@ AnovaUtils = {
                     "sig-level": _sig_level
                 });
             }
-            else {
+            else if (_group1_avg < _group2_avg) {
                 _tukeyhsd_compare[_group1_name].push({
                     "comparison": _group1_name + " < " + _group2_name,
                     "tukeyhsd-p-value": _p,
@@ -104,6 +125,10 @@ AnovaUtils = {
         return _output_json;
     },
     sig_level: function (_p_value) {
+        if (_p_value === 0) {
+            return 0;
+        }
+        
         var _alpha_levels = cfg.stat.alpha.split(",");
         var _level = -1;
         for (var _i = _alpha_levels.length - 1; _i >= 0; _i--) {

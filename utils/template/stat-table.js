@@ -45,13 +45,19 @@ TemplateStatTable = {
     },
     
     render_stat_tr_numeric_test: function (_target_attribute_options_count, _attr_data) {
-        var _this = this;
+        //var _this = this;
         return TemplateUtils.render("stat-table/tbody-tr-numeric-test", {
             target_attribute_options_count: _target_attribute_options_count,
             anova: TemplateUtils.json_decimal_rounding(_attr_data["anova"]),
+            has_f_score: (_attr_data["anova"]["f-score"] !== null),
             display_sign: function () {
                 // {{ chi_square.mode }}: {{ chi_square.chisquare }} {{ chi_square.sig-level }}
                 var _element = this;
+                //console.log(_element);
+                if (_element.anova["f-score"] === null) {
+                    return false;
+                }
+                
                 var _output = TemplateUtils.json_decimal_rounding(_element.anova["f-score"])
                     + "<sup>a</sup>"
                     + TemplateUtils.get_sig_sign(_element.anova["sig-level"]);

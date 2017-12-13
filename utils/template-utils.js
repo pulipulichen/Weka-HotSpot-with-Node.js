@@ -62,6 +62,10 @@ TemplateUtils = {
         if (_cfg_decimal_rounding === undefined) {
             _cfg_decimal_rounding = parseNumber(cfg.stat.decimal_rounding);
         }
+        if (typeof(_number) !== "number") {
+            return _number;
+        }
+        
         _number = _number * Math.pow(10, _cfg_decimal_rounding);
         _number = Math.round(_number);
         return _number / Math.pow(10, _cfg_decimal_rounding);
@@ -77,7 +81,7 @@ TemplateUtils = {
             }
             return _output_array;
         }
-        else if (typeof(_json) === "object") {
+        else if (typeof(_json) === "object" && _json !== null) {
             var _output_json = {};
             for (var _i in _json) {
                 _output_json[_i] = this.json_decimal_rounding(_json[_i], _decimal_rounding);

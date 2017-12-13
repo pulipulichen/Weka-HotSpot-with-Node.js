@@ -11,6 +11,9 @@ WekaHotSpotUtils = {
             var _index_too_large = false;
             
             var _target_attribute_option_count = _stat_json[_file_name].target_attribute_options.length;
+            if (_stat_json[_file_name].target_attribute_options.indexOf("?") > -1) {
+                _target_attribute_option_count--;
+            }
             var _attribute_count = 0;
             var _attributes = _stat_json[_file_name].attributes;
             for (var _a in _attributes) {

@@ -236,6 +236,10 @@ ChiSquareUtils = {
         };
     },
     sig_level: function (_p_value) {
+        if (_p_value === 0) {
+            return 0;
+        }
+        
         var _alpha_levels = cfg.stat.alpha.split(",");
         var _level = -1;
         for (var _i = _alpha_levels.length - 1; _i >= 0; _i--) {
