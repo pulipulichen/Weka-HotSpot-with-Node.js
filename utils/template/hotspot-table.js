@@ -48,7 +48,7 @@ TemplateHotspotTable = {
         return TemplateUtils.render("hotspot-table/td-lhs", {
             "lhs_item": _lhs_item,
             "conf_func": function () {
-                return _lhs_item["conf"] * 100;
+                return Math.floor(TemplateUtils.json_decimal_rounding(_lhs_item["conf"]) * 100);
             },
             "test_func": function () {
                 var _html = "";

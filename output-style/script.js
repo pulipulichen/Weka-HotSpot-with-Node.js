@@ -7,7 +7,7 @@ $(function () {
         
         var _highlight_classname = "highlight";
         var _is_cancel = _tr.hasClass(_highlight_classname);
-        $("." + _highlight_classname).removeClass(_highlight_classname);
+        $('table[data-file-name="' + _file_name +'"] .' + _highlight_classname).removeClass(_highlight_classname);
         
         if (_is_cancel) {
             return;
@@ -15,6 +15,6 @@ $(function () {
         
         var _highlight_tr = $('table[data-file-name="' + _file_name +'"] tr[data-lhs-attr="' + _lhs_attr + '"]');
         _highlight_tr.addClass(_highlight_classname);
-        console.log(_highlight_tr.length);
+        //console.log(_highlight_tr.length);
     });
 });
