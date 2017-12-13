@@ -17,6 +17,7 @@ require('./lib/statistics-distributions.js');
 require('./utils/template-utils.js');
 require('./utils/template/stat-table.js');
 require('./utils/template/hotspot-table.js');
+require('./utils/i18n-utils.js');
 
 var Main = {
     exec: function () {
@@ -225,6 +226,8 @@ var Main = {
 
 TmpUtils.remove();
 Main.exec();
+
+//console.log(i18n.__("welcome $[1]", "布丁"));
 
 //console.log(jStat.tukeyhsd([
 //    [70,83,68,64,69],[85,80,65,72,71,75,75,72,81]

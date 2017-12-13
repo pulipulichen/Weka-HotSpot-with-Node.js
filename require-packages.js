@@ -34,3 +34,6 @@ node_file_cache = require('node-file-cache');
 //    file: "node-file-cache.json",
 //    life: 3600 * 24
 //});
+
+// npm install localize
+Localize = require('localize');
