@@ -133,8 +133,17 @@ TemplateUtils = {
         if (JSONUtils.has_key_value(_data, "mode", "fisher-exact")) {
             _notes.push("<sup>f</sup>: " + i18n.__("Fisher's Exact Test's p-value.") );
         }
-        if (JSONUtils.has_key_value(_data, "adj-residual-is-sig", true)) {
-            _notes.push("<sup>r</sup>: " + i18n.__("Adjusted residual in crosstabs cell.") );
+        // target_attribute_options
+        if (JSONUtils.has_key(_data, "adj-residual")) {
+            var _adj_residual_note = "<sup>r</sup>: " + i18n.__("Adjusted residual in crosstabs cell.");
+            if (JSONUtils.has_key(_data, "target_attribute_options") === true) {
+                if (JSONUtils.has_key_value(_data, "adj-residual-is-sig", true)) {
+                    _notes.push(_adj_residual_note);
+                }
+            }
+            else {
+                _notes.push(_adj_residual_note);
+            }
         }
         
         if (JSONUtils.has_key(_data, "f-score")) {
