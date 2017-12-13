@@ -23,6 +23,10 @@ var Main = {
     exec: function () {
         
         this.setup_data();
+        if (this.data.input_files.length === 0) {
+            throw "No input file.";
+        }
+        
         this.setup_cache();
         this.stat();
         this.hotspot();
@@ -38,7 +42,11 @@ var Main = {
     data: {},
     setup_data: function () {
         var _input_files = get_input_files();
-        var _output_dir = './output/' + get_date_time();
+        
+        var _output_dir = './output';
+        if (parseNumber(cfg.file.append_date_to_output_dir) === true) {
+            _output_dir = _output_dir + "/" + get_date_time();
+        }
         this.data.input_files = _input_files;
         this.data.output_dir = _output_dir;
     },
@@ -215,13 +223,27 @@ var Main = {
             "single-report": _single_report
         }));
         
+        // ----------------------
+        
         // 複製其他檔案過去
         var _style_files = get_style_files();
         
         for (var _i = 0; _i < _style_files.length; _i++) {
-            var _from_file = "./output-style/" + _style_files[_i];
+            var _from_file = cfg.file.output_style_dir + "/" + _style_files[_i];
             var _to_file = _output_dir + "/" + _style_files[_i];
+            //console.log([_from_file, _to_file]);
             fs.createReadStream(_from_file).pipe(fs.createWriteStream(_to_file));
+        }
+        
+        // 移動來源檔案過去
+        if (parseNumber(cfg.file.move_files_after_analyzing) === true) {
+            var _input_files = this.data.input_files;
+            for (var _i = 0; _i < _input_files.length; _i++) {
+                var _from_file = _input_files[_i];
+                var _file_name = path.basename(_from_file, '.csv');
+                var _to_file = _output_dir + "/" + _file_name + ".csv";
+                fs.rename(_from_file, _to_file);
+            }
         }
     }
 };

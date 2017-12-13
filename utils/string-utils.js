@@ -24,5 +24,16 @@ parseNumber = function (_str) {
         eval("_tmp = " + _str);
         _str = _tmp;
     }
+    else {
+        var _boolean = _str.trim().toLowerCase();
+        if (_boolean === "true" 
+                || _boolean === "false"
+                || _boolean === "undefined"
+                || _boolean === "null") {
+            var _tmp;
+            eval("_tmp = " + _str);
+            _str = _tmp;
+        }
+    }
     return _str;
 };

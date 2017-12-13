@@ -1,7 +1,10 @@
 get_input_files = function () {
-    var _input_dir = './input/';
+    var _input_dir = cfg.file.input_dir;
+    if (_input_dir.substr(_input_dir.length-1, 1) !== "/") {
+        _input_dir += "/";
+    }
     var _input_files = fs.readdirSync(_input_dir);
-    var _exclude_files = cfg.weka.train_set_excluded_files.split(",");
+    var _exclude_files = cfg.file.input_excluded_files.split(",");
 
     var _input_files_qualified = [];
     for (var _i = 0; _i < _input_files.length; _i++) {
@@ -30,12 +33,15 @@ get_input_files = function () {
 };
 
 get_style_files = function () {
-    var _input_dir = './output-style/';
+    var _input_dir = cfg.file.output_style_dir;
     var _input_files = fs.readdirSync(_input_dir);
 
     var _input_files_qualified = [];
     for (var _i = 0; _i < _input_files.length; _i++) {
         var _file_name = _input_files[_i];
+        if (_file_name.substr(0,1) === ".") {
+            continue;
+        }
         _input_files_qualified.push(_file_name);
     }
     
