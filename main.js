@@ -43,9 +43,9 @@ var Main = {
     setup_data: function () {
         var _input_files = get_input_files();
         
-        var _output_dir = './output';
+        var _output_dir = cfg.file.output_dir +  '/result/';
         if (parseNumber(cfg.file.append_date_to_output_dir) === true) {
-            _output_dir = _output_dir + "/" + get_date_time();
+            _output_dir = cfg.file.output_dir + "/" + get_date_time();
         }
         this.data.input_files = _input_files;
         this.data.output_dir = _output_dir;
@@ -111,7 +111,7 @@ var Main = {
             return;
         }
         
-        var _hotspot_result_raw = WekaHotSpotUtils.run_commands(this.data.input_files);
+        var _hotspot_result_raw = WekaHotSpotUtils.run_commands(this.data.input_files, this.data.stat);
         var _hotspot_result = WekaHotSpotUtils.parsing_raw_result(_hotspot_result_raw);
         this.data.hotspot = _hotspot_result;
         this.add_stat_to_hotspot();
@@ -164,11 +164,8 @@ var Main = {
         var _view = {};
         for (var _file_name in this.data.stat) {
             _view[_file_name] = {
-                stat: this.data.stat[_file_name],
-                hotspot: {
-                    max: this.data.hotspot[_file_name]["max"],
-                    min: this.data.hotspot[_file_name]["min"]
-                }
+                "stat": this.data.stat[_file_name],
+                "hotspot": this.data.hotspot[_file_name]
             };
         }
         this.data.view = _view;
@@ -184,12 +181,13 @@ var Main = {
             
             // render_hotspot: function (_file_name, _direction, _hotspot_json) {
             
-            var _max_data = _render[_file_name]["hotspot"]["max"];
-            _r["hotspot_max_table"] = TemplateHotspotTable.render_hotspot_table(_file_name, "Maximize", _max_data);
-            
-            var _min_data = _render[_file_name]["hotspot"]["min"];
-            _r["hotspot_min_table"] = TemplateHotspotTable.render_hotspot_table(_file_name, "Minimize", _min_data);
-            
+            _r["hotspot_table"] = {};
+            for (var _direction in _render[_file_name]["hotspot"]) {
+                var _hotspot_data = _render[_file_name]["hotspot"][_direction];
+                //console.log([_direction, _hotspot_data]);
+                _r["hotspot_table"][_direction] = TemplateHotspotTable.render_hotspot_table(_file_name, _direction, _hotspot_data);
+            }
+                
             _render[_file_name] = _r;
         }
         
@@ -203,11 +201,12 @@ var Main = {
         for (var _file_name in _render) {
             var _path = _output_dir + "/" + _file_name + ".html";
             var _file_json = _render[_file_name];
-            var _body_html = _file_json.stat_table 
-                            + "<hr />"
-                            + _file_json.hotspot_max_table 
-                            + "<hr />"
-                            + _file_json.hotspot_min_table;
+            var _body_html = [_file_json.stat_table];
+            for (var _direction in _file_json.hotspot_table) {
+                _body_html.push(_file_json.hotspot_table[_direction]);
+            }
+            _body_html = _body_html.join("<hr />");
+            
             var _single_report_json = {
                 "file_name": _file_name,
                 "date": get_date_time(),
@@ -217,7 +216,7 @@ var Main = {
             fs.writeFileSync(_path, TemplateUtils.render("single-report", _single_report_json));
         }
         
-        var _full_report_path = _output_dir + "/" + "full-report-" + get_date_time() + ".html";
+        var _full_report_path = _output_dir + "/" + "full-report" + ".html";
         fs.writeFileSync(_full_report_path, TemplateUtils.render("full-report", {
             "date": get_date_time(),
             "single-report": _single_report

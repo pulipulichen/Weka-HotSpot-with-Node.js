@@ -1,30 +1,5 @@
 WekaHotSpotUtils = {
-    build_command: function(_input_file_name, _option_index, _minimize_target, _direction) {
-        if (_option_index === undefined) {
-            _option_index = 1;
-        }
-        if (_minimize_target === undefined) {
-            _minimize_target = "";
-        }
-        if (_direction === undefined) {
-            _direction = "";
-        }
-
-        // Local $cmd_weka = @comspec & ' /C Java -Dfile.encoding=utf-8 -cp ' & $extapp_weka & ' weka.Run ' & $weka_command & ' -t "' & $train_file & '" -c ' & $hotspot_targetIndex & ' -V ' & $param & ' -S ' & $hotspot_support & ' -M ' & $hotspot_max_branching_factor & ' -length ' & $hotspot_max_rule_length & ' -I 0.01 -L'
-        return "%COMSPEC% /C Java -Dfile.encoding=utf-8 " 
-                + ' -cp "' + cfg.weka.extapp_weka + '" weka.Run weka.associations.HotSpot '
-                + ' -t "' + _input_file_name + '" '
-                + ' -c ' + cfg.hotspot.targetIndex + ' '
-                + ' -V ' + _option_index + " "
-                + ' -S ' + cfg.hotspot.support + " "
-                + ' -M ' + cfg.hotspot.max_branching_factor + " "
-                + ' -length ' + cfg.hotspot.max_rule_length + " "
-                + ' -I 0.01 '
-                + _direction + " "
-                + _minimize_target;
-    },
-
-    run_commands: function (_input_files) {
+    run_commands: function (_input_files, _stat_json) {
         var _debug = false;
         
         var _output_result = {};    
@@ -34,13 +9,29 @@ WekaHotSpotUtils = {
             _output_result[_file_name] = [];
             var _option_index = 1;
             var _index_too_large = false;
-            while (_index_too_large === false) {
+            
+            var _target_attribute_option_count = _stat_json[_file_name].target_attribute_options.length;
+            var _attribute_count = 0;
+            var _attributes = _stat_json[_file_name].attributes;
+            for (var _a in _attributes) {
+                _attribute_count++;
+            }
+            
+            while (_index_too_large === false && _option_index <= _target_attribute_option_count) {
                 for (var _m = 0; _m < 2; _m++) {
                     
-                    
                     var _minimize_target = "";
-                    if (_m === 1) {
+                    if (_m === 0) {
+                        if (parseNumber(cfg.hotspot.enale_max) === false) {
+                            continue;
+                        }
+                    }
+                    else if (_m === 1) {
                         _minimize_target = "-L";
+                        
+                        if (parseNumber(cfg.hotspot.enale_min) === false) {
+                            continue;
+                        }
                     }
                     
                     for (var _d = 0; _d < 2; _d++) {
@@ -48,7 +39,11 @@ WekaHotSpotUtils = {
                         if (_d === 1) {
                             _direction = "-R";
                         }
-                        var _cmd = this.build_command(_path_name, _option_index, _minimize_target, _direction);
+                        var _cmd = this.build_command(_path_name
+                            , _option_index
+                            , _minimize_target
+                            , _direction
+                            , _attribute_count);
 
                         console.log(_cmd);
                         
@@ -94,6 +89,36 @@ WekaHotSpotUtils = {
         }
 
         return _output_result;
+    },
+
+    build_command: function(_input_file_name, _option_index, _minimize_target, _direction, _attribute_count) {
+        if (_option_index === undefined) {
+            _option_index = 1;
+        }
+        if (_minimize_target === undefined) {
+            _minimize_target = "";
+        }
+        if (_direction === undefined) {
+            _direction = "";
+        }
+        
+        var _max_branching_factor = cfg.hotspot.max_branching_factor;
+        if (_max_branching_factor === "all") {
+            _max_branching_factor = _attribute_count;
+        }
+
+        // Local $cmd_weka = @comspec & ' /C Java -Dfile.encoding=utf-8 -cp ' & $extapp_weka & ' weka.Run ' & $weka_command & ' -t "' & $train_file & '" -c ' & $hotspot_targetIndex & ' -V ' & $param & ' -S ' & $hotspot_support & ' -M ' & $hotspot_max_branching_factor & ' -length ' & $hotspot_max_rule_length & ' -I 0.01 -L'
+        return "%COMSPEC% /C Java -Dfile.encoding=utf-8 " 
+                + ' -cp "' + cfg.weka.extapp_weka + '" weka.Run weka.associations.HotSpot '
+                + ' -t "' + _input_file_name + '" '
+                + ' -c ' + cfg.hotspot.targetIndex + ' '
+                + ' -V ' + _option_index + " "
+                + ' -S ' + cfg.hotspot.support + " "
+                + ' -M ' + _max_branching_factor + " "
+                + ' -length ' + cfg.hotspot.max_rule_length + " "
+                + ' -I 0.01 '
+                + _direction + " "
+                + _minimize_target;
     },
 
     parsing_raw_result: function (_raw_result) {

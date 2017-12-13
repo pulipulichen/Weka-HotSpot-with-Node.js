@@ -1,14 +1,17 @@
 CacheUtils = {
-    enable: true,
     cache_files: {},
     set: function (_key, _value) {
-        if (this.enable === false) {
+        if (parseNumber(cfg.cache.enable) === false) {
             return;
         } 
         var _cache = this.get_cache_file(_key);
         _cache.set(_key, _value);
     },
     get: function (_key) {
+        if (parseNumber(cfg.cache.enable) === false) {
+            return null;
+        }
+        
         var _cache = this.get_cache_file(_key);
         return _cache.get(_key);
     },

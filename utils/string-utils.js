@@ -31,7 +31,7 @@ parseNumber = function (_str) {
                 || _boolean === "undefined"
                 || _boolean === "null") {
             var _tmp;
-            eval("_tmp = " + _str);
+            eval("_tmp = " + _boolean);
             _str = _tmp;
         }
     }

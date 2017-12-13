@@ -22,9 +22,14 @@ TemplateHotspotTable = {
             note_html_array: TemplateUtils.parse_notes(_hotspot_json)
         });
         
+        var _direction_display = "Maximize";
+        if (_direction === "min") {
+            _direction_display = "Minimize";
+        }
+        
         return TemplateUtils.render("hotspot-table/table", {
             "file_name": _file_name, 
-            "direction": _direction,
+            "direction": _direction_display,
             "target_attr": _hotspot_json[0]["rhs"]["attribute"],
             "group_html_array": _group_html_array,
             "tfoot_html": _tfoot_html
