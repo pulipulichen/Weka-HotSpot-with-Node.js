@@ -42,3 +42,6 @@ Localize = require('localize');
 // pip install numpy
 // pip install scipy
 PythonShell = require('python-shell');
+
+// npm install deasync
+deasync = require('deasync');

@@ -228,7 +228,7 @@ def dunn(*args, **kwargs):
             group.remove(None)
         while group.count(np.nan) > 0 :
             group.remove(np.nan)
-        if len(group) < 5:
+        #if len(group) < 5:
             #print Warning("WARNING: at least one group has fewer than 5 proper elements")
             #print kwargs["labels"][i], group
         if len(group) == 0:
