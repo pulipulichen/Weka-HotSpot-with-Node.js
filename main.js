@@ -20,6 +20,7 @@ require('./utils/template/hotspot-table.js');
 require('./utils/i18n-utils.js');
 
 require('./lib/python/dunn/dunn-python.js');
+require('./lib/python/kruskal/kruskal-python.js');
 
 var Main = {
     exec: function () {
@@ -252,6 +253,9 @@ var Main = {
 TmpUtils.remove();
 //Main.exec();
 
+x = [1, 3, 5, 7, 9];
+y = [2, 4, 6, 8, 10];
+console.log(KruskalPython.exec([x,y]));
 
 
 //console.log(i18n.__("welcome $[1]", "布丁"));
