@@ -46,6 +46,14 @@ CSVUtils = {
                 if (_value === "" || _value === "?") {
                     continue;
                 }
+
+                if (_value === true) {
+                    _value = "true";
+                } 
+                else if (_value === false) {
+                    _value = "false";
+                } 
+                
                 
                 if (typeof(_data[_field]) === "undefined") {
                     _data[_field] = {};

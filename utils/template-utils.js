@@ -158,7 +158,7 @@ TemplateUtils = {
         }
         
         if (JSONUtils.has_key(_data, "h-statistic")) {
-            _notes.push("<sup>k</sup>: " + i18n.__("Kruskal-Wallis H test.") );
+            _notes.push("<sup>h</sup>: " + i18n.__("Kruskal-Wallis H test.") );
         }
         if (JSONUtils.has_key(_data, "dunn-p-value")) {
             _notes.push("<sup>d</sup>: " + i18n.__("Dunn's test's p-value.") );

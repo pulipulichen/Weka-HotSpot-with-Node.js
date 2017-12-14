@@ -3,13 +3,17 @@
         {{ attr }}
         {{{ test_html }}}
     </th>
+    
+    {{ #avg_html }}
     <th valign="top" align="left">
         {{ #i18n }}Avg.{{ /i18n }}
     </th>
-    {{ #avg_html }}
         {{{ avg_html }}}
     {{ /avg_html }}
     {{ #median_html }}
+    <th valign="top" align="left">
+        {{ #i18n }}Med.{{ /i18n }}
+    </th>
         {{{ median_html }}}
     {{ /median_html }}
 </tr>

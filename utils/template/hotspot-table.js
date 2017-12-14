@@ -64,6 +64,17 @@ TemplateHotspotTable = {
                             + TemplateUtils.get_sig_sign(_test["sig-level"]);
                     }
                 }
+                else if (typeof(_test["h-statistic"]) !== "undefined") {
+                    // numeric
+                    if (_test["h-statistic"] === null) {
+                        _html = "-";
+                    }
+                    else {
+                        _html = TemplateUtils.json_decimal_rounding(_test["h-statistic"])
+                            + '<sup>h</sup>'
+                            + TemplateUtils.get_sig_sign(_test["sig-level"]);
+                    }
+                }
                 else {
                     // nominal
                     var _mode_abbr = 'c';
@@ -85,13 +96,29 @@ TemplateHotspotTable = {
             "comp_func": function () {
                 var _html = "";
                 var _comparison = _lhs_item["comparison"];
-                if (typeof(_lhs_item["test"]["f-score"]) !== "undefined") {
+                if (typeof(_lhs_item["test"]["f-score"]) !== "undefined"
+                        || typeof(_lhs_item["test"]["h-statistic"]) !== "undefined") {
                     if (_comparison.length > 0) {
                         var _li = [];
                         for (var _i = 0; _i < _comparison.length; _i++) {
+                            var _test = "";
+                            
+                            if (typeof(_comparison[_i]["tukeyhsd-p-value"]) !== "undefined") {
+                                _test = "t";
+                            }
+                            else if (typeof(_comparison[_i]["dunn-p-value"]) !== "undefined") {
+                                _test = "d";
+                            }
+                            
+                            console.log("<div>" 
+                                    + _comparison[_i]["comparison"] 
+                                    + "<sup>" + _test + "</sup>"
+                                    + TemplateUtils.get_sig_sign(_comparison[_i]["sig-level"]) 
+                                    + "</div>");
+                            
                             _li.push("<div>" 
                                     + _comparison[_i]["comparison"] 
-                                    + "<sup>t</sup>"
+                                    + "<sup>" + _test + "</sup>"
                                     + TemplateUtils.get_sig_sign(_comparison[_i]["sig-level"]) 
                                     + "</div>");
                         }

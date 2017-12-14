@@ -5,6 +5,7 @@ Attr.,Attr.
 Sig. Adj. R.,Sig. Adj. R.
 Avg.,Avg.
 Stddev.,Stddev.
+Med.,Med.
 TukeyHSD,TukeyHSD
 Post Hoc,Post Hoc
 HotSpot Result,HotSpot Result

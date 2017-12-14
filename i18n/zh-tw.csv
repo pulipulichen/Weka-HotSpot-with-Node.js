@@ -5,6 +5,7 @@ Attr.,原因屬性
 Sig. Adj. R.,顯著的調整後殘差
 Avg.,平均值
 Stddev.,標準差
+Med.,中位數
 TukeyHSD,TukeyHSD<br />事後比較
 Post Hoc,事後比較
 HotSpot Result,HotSpot結果
@@ -22,7 +23,7 @@ Comp.,比較
 p-value,p值
 Pearson's chi-squared test.,皮爾森的卡方檢定值
 Yates's chi-squared test.,葉氏校正後的卡方檢定值
-Fisher's Exact Test's p-value.,飛雪爾精確檢定的p值
+Fisher's Exact Test's p-value.,費雪爾精確檢定的p值
 Adjusted residual in crosstabs cell.,列聯表的調整後殘差值
 ANOVA's f-score.,ANOVA的檢定統計量f值
 TukeyHSD post-hot test's p-value.,TukeyHSD事後比較的p值

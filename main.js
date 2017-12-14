@@ -143,8 +143,13 @@ var Main = {
                         var _test, _comparison;
 
                         if (_type === "numeric") {
-                            _test = _attr_stat["anova"];
-                            _comparison = _attr_stat["tukeyhsd"][_group];
+                            if (typeof(_attr_stat["anova"]) !== "undefined") {
+                                _test = _attr_stat["anova"];
+                            }
+                            else if (typeof(_attr_stat["kw-h-test"]) !== "undefined") {
+                                _test = _attr_stat["kw-h-test"];
+                            }
+                            _comparison = _attr_stat["post-hoc"][_group];
                         }
                         else if (_type === "nominal") {
                             _test = _attr_stat["chi-square"];
@@ -161,7 +166,7 @@ var Main = {
     setup_view: function () {
         var _cache_key = this.data.cache_key + "_view";
         this.data.view = CacheUtils.get(_cache_key);
-        if (this.data.view !== null) {
+        if (this.data.view !== null && false) {
             return;
         }
         

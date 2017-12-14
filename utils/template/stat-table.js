@@ -38,7 +38,7 @@ TemplateStatTable = {
         var _data = {
             attr: _attr,
             test_html: this.render_stat_tr_numeric_test(_target_attribute_options_count, _attr_data),
-            post_hoc_html: this.render_stat_tr_numeric_list(_target_attribute_options_count, _attr_data["post-hoc"])
+            posthoc_html: this.render_stat_tr_numeric_list(_target_attribute_options_count, _attr_data["post-hoc"])
         };
         
         var _rowspan = 1;
@@ -86,7 +86,7 @@ TemplateStatTable = {
         }
         else if (typeof(_attr_data["kw-h-test"]) !== "undefined") {
             _data["statistic"] = TemplateUtils.json_decimal_rounding(_attr_data["kw-h-test"]);
-            _data["has_statistic"] = (_attr_data["statistic"]["h-statistic"] !== null);
+            _data["has_statistic"] = (_attr_data["kw-h-test"]["h-statistic"] !== null);
             _data["display_sign"] = function () {
                 // {{ chi_square.mode }}: {{ chi_square.chisquh-statistic"are }} {{ chi_square.sig-level }}
                 var _element = this;
@@ -131,9 +131,16 @@ TemplateStatTable = {
                 _group_td.push(TemplateUtils.render("stat-table/tbody-tr-numeric-list", {
                    "list": _array,
                    "comp_func": function () {
-                       return this.comparison 
-                               + "<sup>t</sup>"
-                               + TemplateUtils.get_sig_sign(this["sig-level"]);
+                       var _output = this.comparison;
+                       if (typeof(this['tukeyhsd-p-value']) !== "undefined") {
+                           _output += '<sup>t</sup>';
+                       }
+                       else if (typeof(this['dunn-p-value']) !== "undefined") {
+                           _output += '<sup>d</sup>';
+                       }
+                       _output += TemplateUtils.get_sig_sign(this["sig-level"]);
+                       //console.log(_output);
+                       return _output;
                    }
                 }));
             }
