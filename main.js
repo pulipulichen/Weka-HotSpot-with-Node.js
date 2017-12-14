@@ -251,11 +251,7 @@ var Main = {
 };
 
 TmpUtils.remove();
-//Main.exec();
-
-x = [1, 3, 5, 7, 9];
-y = [2, 4, 6, 8, 10];
-console.log(KruskalPython.exec([x,y]));
+Main.exec();
 
 
 //console.log(i18n.__("welcome $[1]", "布丁"));

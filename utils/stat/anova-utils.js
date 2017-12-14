@@ -16,6 +16,7 @@ AnovaUtils = {
 
         //console.log(_group_array);
         //var _f_score = jStat.anovafscore(_group_array);
+        var _mode = "anova";
         var _f_score = anova.test(_group_array);
         var _p_value = null;
         var _sig_level = 0;
@@ -32,6 +33,7 @@ AnovaUtils = {
         //console.log([_f_score, _df1, _df2, _p_value]);
 
         var _anova_data = {
+            "mode": _mode,
             "f-score": _f_score,
             "p-value": _p_value,
             "sig-level": _sig_level
