@@ -19,6 +19,7 @@ require('./utils/template/stat-table.js');
 require('./utils/template/hotspot-table.js');
 require('./utils/i18n-utils.js');
 
+require('./utils/stat/kruskal-wallis-h-test-utils.js');
 require('./lib/python/dunn/dunn-python.js');
 require('./lib/python/kruskal/kruskal-python.js');
 
@@ -253,6 +254,17 @@ var Main = {
 TmpUtils.remove();
 Main.exec();
 
+/*
+a = [0.28551035, 0.338524035, 0.088631321, 0.205930807, 0.363240102]
+b = [0.52173913, 0.763358779, 0.325436786, 0.425305688, 0.378071834]
+c = [0.98911968, 1.192718142, 0.788288288, 0.549176236, 0.544588155]
+d = [1.26705653, 1.625320787, 1.266108976, 1.154187629, 1.268489431]
+e = [1.25697569, 1.265897356, 1.237814561, 0.954612564, 2.365415457]
+
+console.log(KruskalWallisHtestUtils.analyze({
+    a: a, b: b, c: c, d:d, e:e
+}));
+*/
 
 //console.log(i18n.__("welcome $[1]", "布丁"));
 

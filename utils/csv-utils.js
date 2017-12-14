@@ -160,7 +160,27 @@ CSVUtils = {
             return _group_json;
         },
         compare_numeric_data: function (_group_json) {
-            return AnovaUtils.analyze(_group_json);
+            
+            
+            // 在這裡要決定樣本的大小
+            var _small_sample_threshold = parseNumber(cfg.stat.small_sample_threshold);
+            var _is_small_sample = false;
+            for (var _g in _group_json) {
+                if (_group_json[_g].length < _small_sample_threshold) {
+                    _is_small_sample = true;
+                    break;
+                }
+            }
+            
+            var _result;
+            if (_is_small_sample) {
+                _result = KruskalWallisHtestUtils.analyze(_group_json);
+            }
+            else {
+                _result = AnovaUtils.analyze(_group_json);
+            }
+            
+            return _result;
         },
         compare_nominal_data: function (_group_json) {
             return ChiSquareUtils.analyze(_group_json);
