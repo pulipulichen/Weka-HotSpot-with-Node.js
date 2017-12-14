@@ -166,7 +166,7 @@ var Main = {
     setup_view: function () {
         var _cache_key = this.data.cache_key + "_view";
         this.data.view = CacheUtils.get(_cache_key);
-        if (this.data.view !== null && false) {
+        if (this.data.view !== null) {
             return;
         }
         

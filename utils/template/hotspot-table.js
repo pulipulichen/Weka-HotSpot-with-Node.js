@@ -110,12 +110,6 @@ TemplateHotspotTable = {
                                 _test = "d";
                             }
                             
-                            console.log("<div>" 
-                                    + _comparison[_i]["comparison"] 
-                                    + "<sup>" + _test + "</sup>"
-                                    + TemplateUtils.get_sig_sign(_comparison[_i]["sig-level"]) 
-                                    + "</div>");
-                            
                             _li.push("<div>" 
                                     + _comparison[_i]["comparison"] 
                                     + "<sup>" + _test + "</sup>"

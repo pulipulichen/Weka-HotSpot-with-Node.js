@@ -22,19 +22,48 @@ KruskalWallisHtestUtils = {
             //"tukeyhsd": JSON.stringify(_tukeyhsd_compare)
         };
     },
+    is_numbers_identical: function (_group_json) {
+        var _is_numbers_identical = true;
+        var _last_numder = null;
+        for (var _i in _group_json) {
+            for (var _j in _group_json[_i]) {
+                var _number = _group_json[_i][_j];
+                if (_last_numder === null) {
+                    _last_numder = _number;
+                }
+                else if (_last_numder !== _number) {
+                    _is_numbers_identical = false;
+                    break;
+                }
+            }
+            if (_is_numbers_identical === false) {
+                break;
+            }
+        }
+        return _is_numbers_identical;
+    },
     kw_test: function (_group_json) {
         var _group_array = [];
         for (var _group in _group_json) {
             _group_array.push(_group_json[_group]);
         }
-        var _kw_result = KruskalPython.exec(_group_array);
-        var _sig_level = 0;
-        _sig_level = this.sig_level(_kw_result.pvalue);
+        
+        var _is_numbers_identical = this.is_numbers_identical(_group_json);
+        
         var _statistic = {
-            "h-statistic": _kw_result.statistic,
-            "p-value": _kw_result.pvalue,
-            "sig-level": _sig_level
+            "h-statistic": null,
+            "p-value": null,
+            "sig-level": 0
         };
+        if (_is_numbers_identical === false) {
+            var _kw_result = KruskalPython.exec(_group_array);
+            var _sig_level = this.sig_level(_kw_result.pvalue);
+            _statistic = {
+                "h-statistic": _kw_result.statistic,
+                "p-value": _kw_result.pvalue,
+                "sig-level": _sig_level
+            };
+        }
         return _statistic;
     },
     group_median: function (_group_json) {
@@ -61,6 +90,10 @@ KruskalWallisHtestUtils = {
             _group_array.push(_group_json[_group]);
             _group_id.push(_group);
             _compare[_group] = [];
+        }
+        
+        if (this.is_numbers_identical(_group_json)) {
+            return _compare;
         }
         
         var _dunn_result = DunnPython.exec(_group_array);

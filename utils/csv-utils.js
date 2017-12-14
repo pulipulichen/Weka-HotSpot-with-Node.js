@@ -156,14 +156,23 @@ CSVUtils = {
     // ---------------------------------
     stat: {
         analyse: function (_group_json, _types_json) {
+            var _attr_count = 0;
+            for (var _attr in _group_json) {
+                _attr_count++;
+            }
+            
+            var _attr_index = 1;
             for (var _attr in _group_json) {
                 if (_types_json[_attr] === "numeric") {
                     //console.log(_attr);
+                    console.log("[" + _attr_index + "/" + _attr_count + "] Analyzing numeric attribute: " + _attr);
                     _group_json[_attr] = this.compare_numeric_data(_group_json[_attr]);
                 }
                 else {
+                    console.log("[" + _attr_index + "/" + _attr_count + "] Analyzing nominal attribute: " + _attr);
                     _group_json[_attr] = this.compare_nominal_data(_group_json[_attr]);
                 }
+                _attr_index++;
             }
             return _group_json;
         },
