@@ -6,6 +6,7 @@ Sig. Adj. R.,顯著的調整後殘差
 Avg.,平均值
 Stddev.,標準差
 TukeyHSD,TukeyHSD<br />事後比較
+Post Hoc,事後比較
 HotSpot Result,HotSpot結果
 Target Maximize,目標屬性最大化
 Target Minimize,目標屬性最小化
@@ -23,5 +24,7 @@ Pearson's chi-squared test.,皮爾森的卡方檢定值
 Yates's chi-squared test.,葉氏校正後的卡方檢定值
 Fisher's Exact Test's p-value.,飛雪爾精確檢定的p值
 Adjusted residual in crosstabs cell.,列聯表的調整後殘差值
-ANOVA's f-score.,ANOVA的f值
+ANOVA's f-score.,ANOVA的檢定統計量f值
 TukeyHSD post-hot test's p-value.,TukeyHSD事後比較的p值
+Kruskal-Wallis H test.,Kruskal-Wallis的H檢定統計量
+Dunn's test's p-value.,Dunn檢定的p值

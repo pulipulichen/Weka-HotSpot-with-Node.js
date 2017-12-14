@@ -157,6 +157,13 @@ TemplateUtils = {
             _notes.push("<sup>t</sup>: " + i18n.__("TukeyHSD post-hot test's p-value.") );
         }
         
+        if (JSONUtils.has_key(_data, "h-statistic")) {
+            _notes.push("<sup>k</sup>: " + i18n.__("Kruskal-Wallis H test.") );
+        }
+        if (JSONUtils.has_key(_data, "dunn-p-value")) {
+            _notes.push("<sup>d</sup>: " + i18n.__("Dunn's test's p-value.") );
+        }
+        
         return _notes;
     },
     

@@ -35,35 +35,74 @@ TemplateStatTable = {
     // --------------------
     
     render_stat_tr_numeric: function (_attr, _attr_data, _target_attribute_options_count) {
-        return TemplateUtils.render("stat-table/tbody-tr-numeric", {
+        var _data = {
             attr: _attr,
             test_html: this.render_stat_tr_numeric_test(_target_attribute_options_count, _attr_data),
-            avg_html: this.render_stat_tr_numeric_indication(_target_attribute_options_count, _attr_data["avg"]),
-            stddev_html: this.render_stat_tr_numeric_indication(_target_attribute_options_count, _attr_data["stddev"]),
-            tukeyhsd_html: this.render_stat_tr_numeric_list(_target_attribute_options_count, _attr_data["tukeyhsd"])
-        });
+            post_hoc_html: this.render_stat_tr_numeric_list(_target_attribute_options_count, _attr_data["post-hoc"])
+        };
+        
+        var _rowspan = 1;
+        
+        if (typeof(_attr_data["avg"]) !== "undefined") {
+            _data["avg_html"] = this.render_stat_tr_numeric_indication(_target_attribute_options_count, _attr_data["avg"]);
+            _rowspan++;
+        }
+        if (typeof(_attr_data["stddev"]) !== "undefined") {
+            _data["stddev_html"] = this.render_stat_tr_numeric_indication(_target_attribute_options_count, _attr_data["stddev"]);
+            _rowspan++;
+        }
+        if (typeof(_attr_data["median"]) !== "undefined") {
+            _data["median_html"] = this.render_stat_tr_numeric_indication(_target_attribute_options_count, _attr_data["median"]);
+            _rowspan++;
+        }
+        
+        _data["rowspan"] = _rowspan;
+        
+        return TemplateUtils.render("stat-table/tbody-tr-numeric", _data);
     },
     
     render_stat_tr_numeric_test: function (_target_attribute_options_count, _attr_data) {
         //var _this = this;
-        return TemplateUtils.render("stat-table/tbody-tr-numeric-test", {
-            target_attribute_options_count: _target_attribute_options_count,
-            anova: TemplateUtils.json_decimal_rounding(_attr_data["anova"]),
-            has_f_score: (_attr_data["anova"]["f-score"] !== null),
-            display_sign: function () {
+        var _data = {
+            target_attribute_options_count: _target_attribute_options_count
+        };
+        
+        if (typeof(_attr_data["anova"]) !== "undefined") {
+            _data["statistic"] = TemplateUtils.json_decimal_rounding(_attr_data["anova"]);
+            _data["has_statistic"] = (_attr_data["anova"]["f-score"] !== null);
+            _data["display_sign"] = function () {
                 // {{ chi_square.mode }}: {{ chi_square.chisquare }} {{ chi_square.sig-level }}
                 var _element = this;
                 //console.log(_element);
-                if (_element.anova["f-score"] === null) {
+                if (_element.statistic["f-score"] === null) {
                     return false;
                 }
                 
-                var _output = TemplateUtils.json_decimal_rounding(_element.anova["f-score"])
+                var _output = TemplateUtils.json_decimal_rounding(_element.statistic["f-score"])
                     + "<sup>a</sup>"
-                    + TemplateUtils.get_sig_sign(_element.anova["sig-level"]);
+                    + TemplateUtils.get_sig_sign(_element.statistic["sig-level"]);
                 return _output;
-            }
-        });
+            };
+        }
+        else if (typeof(_attr_data["kw-h-test"]) !== "undefined") {
+            _data["statistic"] = TemplateUtils.json_decimal_rounding(_attr_data["kw-h-test"]);
+            _data["has_statistic"] = (_attr_data["statistic"]["h-statistic"] !== null);
+            _data["display_sign"] = function () {
+                // {{ chi_square.mode }}: {{ chi_square.chisquh-statistic"are }} {{ chi_square.sig-level }}
+                var _element = this;
+                //console.log(_element);
+                if (_element.statistic["h-statistic"] === null) {
+                    return false;
+                }
+                
+                var _output = TemplateUtils.json_decimal_rounding(_element.statistic["h-statistic"])
+                    + "<sup>h</sup>"
+                    + TemplateUtils.get_sig_sign(_element.statistic["sig-level"]);
+                return _output;
+            };
+        }
+        
+        return TemplateUtils.render("stat-table/tbody-tr-numeric-test", _data);
     },
     
     render_stat_tr_numeric_indication: function (_target_attribute_options_count, _group_json) {

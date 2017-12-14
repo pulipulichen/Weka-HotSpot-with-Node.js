@@ -117,7 +117,7 @@ AnovaUtils = {
             "anova": _anova_data,
             "avg": _avg_data,
             "stddev": _stddev_data,
-            "tukeyhsd": _tukeyhsd_compare
+            "post-hoc": _tukeyhsd_compare
             //"tukeyhsd": JSON.stringify(_tukeyhsd_compare)
         };
         return _output_json;

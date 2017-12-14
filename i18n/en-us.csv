@@ -6,6 +6,7 @@ Sig. Adj. R.,Sig. Adj. R.
 Avg.,Avg.
 Stddev.,Stddev.
 TukeyHSD,TukeyHSD
+Post Hoc,Post Hoc
 HotSpot Result,HotSpot Result
 Target Maximize,Target Maximize
 Target Minimize,Target Minimize
@@ -25,3 +26,5 @@ Fisher's Exact Test's p-value.,Fisher's Exact Test's p-value.
 Adjusted residual in crosstabs cell.,Adjusted residual in crosstabs cell.
 ANOVA's f-score.,ANOVA's f-score.
 TukeyHSD post-hot test's p-value.,TukeyHSD post-hot test's p-value.
+Kruskal-Wallis H test.,Kruskal-Wallis H test.
+Dunn's test's p-value.,Dunn's test's p-value.
