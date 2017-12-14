@@ -37,3 +37,8 @@ node_file_cache = require('node-file-cache');
 
 // npm install localize
 Localize = require('localize');
+
+// npm install python-shell
+// pip install numpy
+// pip install scipy
+PythonShell = require('python-shell');
