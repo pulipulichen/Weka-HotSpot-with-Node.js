@@ -70,10 +70,16 @@ var Main = {
             return;
         }
         
+        console.log("\n======================\n");
+        console.log("Statistic analyse\n");
         var _stat_data = {};
         for (var _i = 0; _i < this.data.input_files.length; _i++) {
+            
             var _file_path = this.data.input_files[_i];
             var _file_name = path.basename(_file_path, '.csv');
+            
+            console.log("\nFile [" + (_i+1) + "/" + this.data.input_files.length + "] :" + _file_name + "\n");
+            
             var _csv1 = CSVUtils.read(_file_path);
             var _target_attr = CSVUtils.get_target_attribute(_csv1);
             var _group_json = CSVUtils.group_by_target_attribute(_csv1);
@@ -115,6 +121,8 @@ var Main = {
             return;
         }
         
+        console.log("\n======================\n");
+        console.log("Hotspot analyse\n");
         var _hotspot_result_raw = WekaHotSpotUtils.run_commands(this.data.input_files, this.data.stat);
         var _hotspot_result = WekaHotSpotUtils.parsing_raw_result(_hotspot_result_raw);
         this.data.hotspot = _hotspot_result;

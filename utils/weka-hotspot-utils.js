@@ -6,6 +6,8 @@ WekaHotSpotUtils = {
         for (var _i = 0; _i < _input_files.length; _i++) {
             var _path_name = _input_files[_i];
             var _file_name = path.basename(_path_name, '.csv');
+            
+            console.log("\nFile [" + (_i+1) + "/" + _input_files.length + "] :" + _file_name + "\n");
             _output_result[_file_name] = [];
             var _option_index = 1;
             var _index_too_large = false;
