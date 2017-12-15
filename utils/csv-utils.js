@@ -43,9 +43,9 @@ CSVUtils = {
                 }
                 
                 var _value = parseNumber(_row[_field]);
-                if (_value === "" || _value === "?") {
-                    continue;
-                }
+                //if (_value === "" || _value === "?") {
+                //    continue;
+                //}
 
                 if (_value === true) {
                     _value = "true";
@@ -177,6 +177,18 @@ CSVUtils = {
             return _group_json;
         },
         compare_numeric_data: function (_group_json) {
+            // 要過濾掉不是數字的資料
+            var _filtered_group_json = {};
+            for (var _g in _group_json) {
+                _filtered_group_json[_g] = [];
+                for (var _i in _group_json[_g]) {
+                    var _v = _group_json[_g];
+                    if (isNaN(_v) === false) {
+                        _filtered_group_json[_g].push(_v);
+                    } 
+                }
+            }
+            _group_json = _filtered_group_json;
             
             
             // 在這裡要決定樣本的大小

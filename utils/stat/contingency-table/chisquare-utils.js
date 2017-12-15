@@ -14,7 +14,7 @@ ChiSquareUtils = {
         }
     },
     analyze: function (_contingency_table) {
-        
+        //console.log(_contingency_table);
         var _cell_json = this.cell_analyze(_contingency_table);
         
         // ----------------
@@ -57,6 +57,14 @@ ChiSquareUtils = {
         }
         
         var _chi_sqr;
+        
+        var _df = this.df(_cell_json);
+        if (_df === 0) {
+            TmpUtils.append(_cell_json);
+            console.log(_cell_json);
+            throw "df = 0";
+        }
+        
         if (_mode === "chi-sqr") {
             _chi_sqr = this.chisquared(_cell_json);
         }
@@ -195,7 +203,7 @@ ChiSquareUtils = {
                     "yates-residual": ( Math.pow((Math.abs(_residual) - 0.5), 2) / _exp ),
                     "adj-residual": _adj_residual,
                     "sig-level": _sig_level,
-                    "adj-residual-is-sig": _is_sig,
+                    "adj-residual-is-sig": _is_sig
                 };
             }
         }
