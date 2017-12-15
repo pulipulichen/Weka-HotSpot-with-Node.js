@@ -1,0 +1,1 @@
+node /root/Weka-HotSpot-with-Node.js/main.js

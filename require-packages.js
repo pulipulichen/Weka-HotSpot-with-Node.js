@@ -30,18 +30,14 @@ Mustache = require('mustache');
 
 // npm install --save node-file-cache
 node_file_cache = require('node-file-cache');
-//cache = require('node-file-cache').create({
-//    file: "node-file-cache.json",
-//    life: 3600 * 24
-//});
 
-// npm install localize
+// npm install --save localize
 Localize = require('localize');
 
-// npm install python-shell
+// npm install --save python-shell
 // pip install numpy
 // pip install scipy
 PythonShell = require('python-shell');
 
-// npm install deasync
+// npm install --save deasync
 deasync = require('deasync');
