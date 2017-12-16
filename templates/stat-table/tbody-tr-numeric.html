@@ -25,6 +25,14 @@
     {{{ stddev_html }}}
 </tr>
 {{ /stddev_html }}
+{{ #iqr_html }}
+<tr data-lhs-attr="{{ attr }}">
+    <th valign="top" align="left">
+        {{ #i18n }}IQR.{{ /i18n }}
+    </th>
+    {{{ iqr_html }}}
+</tr>
+{{ /iqr_html }}
 <tr data-lhs-attr="{{ attr }}" class="post-hoc">
     <th valign="top" align="left">
         {{ #i18n }}Post Hoc{{ /i18n }}

@@ -6,6 +6,7 @@ Sig. Adj. R.,顯著的調整後殘差
 Avg.,平均值
 Stddev.,標準差
 Med.,中位數
+IQR.,四分位距
 TukeyHSD,TukeyHSD<br />事後比較
 Post Hoc,事後比較
 HotSpot Result,HotSpot結果

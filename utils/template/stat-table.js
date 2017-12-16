@@ -55,6 +55,10 @@ TemplateStatTable = {
             _data["median_html"] = this.render_stat_tr_numeric_indication(_target_attribute_options_count, _attr_data["median"]);
             _rowspan++;
         }
+        if (typeof(_attr_data["iqr"]) !== "undefined") {
+            _data["iqr_html"] = this.render_stat_tr_numeric_indication(_target_attribute_options_count, _attr_data["iqr"]);
+            _rowspan++;
+        }
         
         _data["rowspan"] = _rowspan;
         

@@ -4,4 +4,4 @@ StatUtils = {
         $x = Math.round($x);
         return $x / Math.pow(10, $p);
     }
-}
+};

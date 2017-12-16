@@ -1,8 +1,19 @@
 TemplateHotspotTable = {
     render_hotspot_table: function (_file_name, _direction, _hotspot_json) {
         var _this = this;
-        var _group_html_array = [];
+        
+        // hotspot要按group順序排序啊
+        var _group_name = {};
         for (var _i = 0; _i < _hotspot_json.length; _i++) {
+            var _name = _hotspot_json[_i]["rhs"]["value"];
+            _group_name[_name] = _i;
+        }
+        
+        _group_name = json_sort_by_key(_group_name);
+        
+        var _group_html_array = [];
+        for (var _name in _group_name) {
+            var _i = _group_name[_name];
             var _rhs = _hotspot_json[_i]["rhs"];
             var _lhs = _hotspot_json[_i]["lhs"];
             for (var _j = 0; _j < _lhs.length; _j++ ) {

@@ -14,10 +14,12 @@ KruskalWallisHtestUtils = {
         
         var _statistic = this.kw_test(_group_json);
         var _group_median = this.group_median(_group_json);
+        var _group_iqr = this.group_iqr(_group_json);
         var _post_hoc = this.post_hoc(_group_json);
         return {
             "kw-h-test": _statistic,
             "median": _group_median,
+            "iqr": _group_iqr,
             "post-hoc": _post_hoc
             //"tukeyhsd": JSON.stringify(_tukeyhsd_compare)
         };
@@ -49,7 +51,7 @@ KruskalWallisHtestUtils = {
         }
         
         var _is_numbers_identical = this.is_numbers_identical(_group_json);
-        
+        //console.log(["_is_numbers_identical", _is_numbers_identical, _group_json]);
         var _statistic = {
             "h-statistic": null,
             "p-value": null,
@@ -81,6 +83,22 @@ KruskalWallisHtestUtils = {
         }
         
         return _median_data;
+    },
+    group_iqr: function (_group_json) {
+        var _data = {};
+
+        for (var _group_name in _group_json) {
+            var _data_array = _group_json[_group_name];
+            
+            if (_data_array.length > 0) {
+                _data[_group_name] = jStat.percentile(_data_array, 0.75) - jStat.percentile(_data_array, 0.25);
+            }
+            else {
+                _data[_group_name] = null;
+            }
+        }
+        
+        return _data;
     },
     post_hoc: function (_group_json) {
         var _group_array = [];

@@ -182,7 +182,7 @@ CSVUtils = {
             for (var _g in _group_json) {
                 _filtered_group_json[_g] = [];
                 for (var _i in _group_json[_g]) {
-                    var _v = _group_json[_g];
+                    var _v = _group_json[_g][_i];
                     if (isNaN(_v) === false) {
                         _filtered_group_json[_g].push(_v);
                     } 
@@ -202,7 +202,7 @@ CSVUtils = {
             }
             
             var _result;
-            if (_is_small_sample) {
+            if (_is_small_sample === true) {
                 _result = KruskalWallisHtestUtils.analyze(_group_json);
             }
             else {
