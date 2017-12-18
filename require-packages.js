@@ -13,9 +13,6 @@ shell = require('shelljs');
 // npm install --save node-ini
 ini = require('node-ini');
 
-// npm install --save sleep
-sleep = require('sleep');
-
 // npm install csv
 csv_parse = require('csv-parse/lib/sync');
 

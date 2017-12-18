@@ -13,12 +13,12 @@ HotSpot Result,HotSpot結果
 Target Maximize,目標屬性最大化
 Target Minimize,目標屬性最小化
 RHS,結果規則
-LHS,原因規則
+LHS,前提規則LHS
 Cover,涵蓋率
 Conf.,信賴度
 Lift.,增益度
 Lev.,影響度
-Conv.,確信度
+Conv.,肯定度
 Test,統計檢定
 Comp.,比較
 p-value,p值
